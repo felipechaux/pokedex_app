@@ -25,8 +25,8 @@ class RegionsPage extends StatelessWidget {
                 const Text(
                   '¡Muy pronto disponible!',
                   style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w800,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                     color: Color(0xFF2E3133),
                     letterSpacing: -0.5,
                   ),

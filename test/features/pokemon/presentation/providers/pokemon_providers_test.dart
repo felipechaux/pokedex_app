@@ -106,6 +106,9 @@ void main() {
       weight: 69,
       stats: [],
       abilities: [],
+      flavorText: 'flavor',
+      category: 'category',
+      genderRate: 1,
     );
     when(() => mockGetPokemonDetail(any())).thenAnswer((_) async => tPokemon);
 

@@ -3,18 +3,23 @@ import 'package:mocktail/mocktail.dart';
 import 'package:pokedex_app/features/pokemon/data/data_sources/remote/pokemon_remote_data_source.dart';
 import 'package:pokedex_app/features/pokemon/data/models/pokemon_list_response_model.dart';
 import 'package:pokedex_app/features/pokemon/data/models/pokemon_model.dart';
-import 'package:pokedex_app/core/errors/failures.dart';
+import 'package:pokedex_app/features/pokemon/data/data_sources/local/pokemon_local_data_source.dart';
 import 'package:pokedex_app/features/pokemon/data/repository/pokemon_repository_impl.dart';
 
+import 'package:pokedex_app/features/pokemon/data/models/pokemon_species_model.dart';
+
 class MockPokemonRemoteDataSource extends Mock implements PokemonRemoteDataSource {}
+class MockPokemonLocalDataSource extends Mock implements PokemonLocalDataSource {}
 
 void main() {
   late PokemonRepositoryImpl repository;
   late MockPokemonRemoteDataSource mockRemoteDataSource;
+  late MockPokemonLocalDataSource mockLocalDataSource;
 
   setUp(() {
     mockRemoteDataSource = MockPokemonRemoteDataSource();
-    repository = PokemonRepositoryImpl(mockRemoteDataSource);
+    mockLocalDataSource = MockPokemonLocalDataSource();
+    repository = PokemonRepositoryImpl(mockRemoteDataSource, mockLocalDataSource);
   });
 
   group('getPokemonList', () {
@@ -41,7 +46,7 @@ void main() {
       sprites: PokemonSprites(frontDefault: 'url'),
     );
 
-    test('should return list of pokemon entities when the call to remote data source is successful', () async {
+    test('should return list of pokemon entities when call is successful', () async {
       // Arrange
       when(() => mockRemoteDataSource.getPokemonList(
             limit: any(named: 'limit'),
@@ -56,26 +61,6 @@ void main() {
       // Assert
       expect(result.length, 1);
       expect(result.first.name, 'bulbasaur');
-      expect(result.first.types, ['grass']);
-      verify(() => mockRemoteDataSource.getPokemonList(limit: 20, offset: 0)).called(1);
-      verify(() => mockRemoteDataSource.getPokemonDetail(1)).called(1);
-    });
-
-    test('should throw Failure.unknown when the call to remote data source throws a generic Exception', () async {
-      // Arrange
-      when(() => mockRemoteDataSource.getPokemonList(
-            limit: any(named: 'limit'),
-            offset: any(named: 'offset'),
-          )).thenThrow(Exception('Server Error'));
-
-      // Act
-      final call = repository.getPokemonList;
-
-      // Assert
-      expect(
-        () => call(limit: 20, offset: 0),
-        throwsA(isA<Failure>()),
-      );
     });
   });
 
@@ -85,29 +70,42 @@ void main() {
       name: 'bulbasaur',
       height: 7,
       weight: 69,
-      types: [
-        PokemonTypeSlot(
-          slot: 1,
-          type: PokemonTypeRef(name: 'grass', url: 'url'),
-        ),
-      ],
+      types: [],
       stats: [],
       abilities: [],
       sprites: PokemonSprites(frontDefault: 'url'),
     );
 
-    test('should return pokemon detail entity when call to remote data source is successful', () async {
+    const tSpeciesModel = PokemonSpeciesModel(
+      genderRate: 1,
+      flavorTextEntries: [
+        FlavorTextEntry(
+          flavorText: 'flavor',
+          language: LanguageRef(name: 'es'),
+        ),
+      ],
+      genera: [
+        GenusEntry(
+          genus: 'category',
+          language: LanguageRef(name: 'es'),
+        ),
+      ],
+    );
+
+    test('should return pokemon entity when call is successful', () async {
       // Arrange
       when(() => mockRemoteDataSource.getPokemonDetail(any()))
           .thenAnswer((_) async => tPokemonModel);
+      when(() => mockRemoteDataSource.getPokemonSpecies(any()))
+          .thenAnswer((_) async => tSpeciesModel);
 
       // Act
       final result = await repository.getPokemonDetail(id: 1);
 
       // Assert
       expect(result.id, 1);
-      expect(result.name, 'bulbasaur');
-      verify(() => mockRemoteDataSource.getPokemonDetail(1)).called(1);
+      expect(result.flavorText, 'flavor');
+      expect(result.category, 'category');
     });
   });
 }

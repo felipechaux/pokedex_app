@@ -5,6 +5,7 @@ import 'package:pokedex_app/features/pokemon/domain/entities/pokemon.dart';
 import 'package:pokedex_app/features/pokemon/domain/entities/pokemon_list_item.dart';
 import 'package:pokedex_app/features/pokemon/domain/repository/pokemon_repository.dart';
 import 'package:pokedex_app/features/pokemon/data/data_sources/remote/pokemon_remote_data_source.dart';
+import 'package:pokedex_app/features/pokemon/data/data_sources/local/pokemon_local_data_source.dart';
 import 'package:pokedex_app/features/pokemon/data/models/pokemon_model.dart';
 import 'package:pokedex_app/features/pokemon/data/models/pokemon_species_model.dart';
 
@@ -13,9 +14,10 @@ import 'package:pokedex_app/features/pokemon/data/models/pokemon_species_model.d
 /// Communicates with the remote data source and maps the
 /// API models to domain entities before returning them.
 final class PokemonRepositoryImpl implements PokemonRepository {
-  const PokemonRepositoryImpl(this._remoteDataSource);
+  const PokemonRepositoryImpl(this._remoteDataSource, this._localDataSource);
 
   final PokemonRemoteDataSource _remoteDataSource;
+  final PokemonLocalDataSource _localDataSource;
 
   @override
   Future<List<PokemonListItem>> getPokemonList({
@@ -50,6 +52,26 @@ final class PokemonRepositoryImpl implements PokemonRepository {
       }
       throw Failure.unknown(message: 'Error inesperado: $e');
     }
+  }
+
+  @override
+  Future<List<PokemonListItem>> getFavorites() async {
+    return _localDataSource.getFavorites();
+  }
+  
+  @override
+  Future<void> toggleFavorite({required PokemonListItem item}) async {
+    final isFav = await _localDataSource.isFavorite(item.id);
+    if (isFav) {
+      await _localDataSource.removeFavorite(item.id);
+    } else {
+      await _localDataSource.saveFavorite(item);
+    }
+  }
+
+  @override
+  Future<bool> isFavorite({required int pokemonId}) async {
+    return _localDataSource.isFavorite(pokemonId);
   }
 
   @override

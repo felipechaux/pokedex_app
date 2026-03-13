@@ -8,8 +8,27 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() {
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart' as p;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:pokedex_app/core/providers/storage_providers.dart';
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
+  // Initialize SharedPreferences
+  final sharedPrefs = await SharedPreferences.getInstance();
+
+  // Initialize SQLite Database
+  final database = await openDatabase(
+    p.join(await getDatabasesPath(), 'pokedex.db'),
+    onCreate: (db, version) {
+      return db.execute(
+        'CREATE TABLE favorites(id INTEGER PRIMARY KEY, name TEXT, imageUrl TEXT, types TEXT)',
+      );
+    },
+    version: 1,
+  );
 
   // Disable dynamic font fetching when offline to prevent main-thread blockage
   // and noise in the console. GoogleFonts will fallback to system fonts instantly.
@@ -35,8 +54,12 @@ void main() {
 
   runApp(
     // ProviderScope is required for Riverpod to function.
-    const ProviderScope(
-      child: PokedexApp(),
+    ProviderScope(
+      overrides: [
+        sharedPrefsProvider.overrideWithValue(sharedPrefs),
+        databaseProvider.overrideWithValue(database),
+      ],
+      child: const PokedexApp(),
     ),
   );
 }

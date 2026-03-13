@@ -14,4 +14,13 @@ abstract interface class PokemonRepository {
 
   /// Fetches the full detail of a single Pokemon by [id].
   Future<Pokemon> getPokemonDetail({required int id});
+
+  /// Returns all favorite Pokemon objects.
+  Future<List<PokemonListItem>> getFavorites();
+
+  /// Toggles the favorite status — saves [item] if not present, removes if it is.
+  Future<void> toggleFavorite({required PokemonListItem item});
+
+  /// Checks if a Pokemon is a favorite.
+  Future<bool> isFavorite({required int pokemonId});
 }

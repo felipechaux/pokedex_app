@@ -24,6 +24,9 @@ void main() {
     weight: 69,
     stats: [],
     abilities: [],
+    flavorText: 'flavor',
+    category: 'category',
+    genderRate: 1,
   );
 
   test('should get pokemon detail from the repository', () async {

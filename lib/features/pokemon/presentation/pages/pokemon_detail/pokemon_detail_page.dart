@@ -26,12 +26,28 @@ class PokemonDetailPage extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(
-              Icons.favorite_border,
-              color: Colors.white,
+            icon: Icon(
+              ref.watch(isPokemonFavoriteProvider(pokemonId))
+                  ? Icons.favorite
+                  : Icons.favorite_border,
+              color: ref.watch(isPokemonFavoriteProvider(pokemonId))
+                  ? Colors.red
+                  : Colors.white,
               size: 28,
             ),
-            onPressed: () {},
+            onPressed: () {
+              final detail = detailAsync.value;
+              if (detail == null) return;
+              
+              ref.read(favoritesProvider.notifier).toggle(
+                PokemonListItemState(
+                  id: detail.id,
+                  name: detail.name,
+                  imageUrl: detail.imageUrl,
+                  types: detail.types,
+                ),
+              );
+            },
           ),
           const SizedBox(width: 8),
         ],
