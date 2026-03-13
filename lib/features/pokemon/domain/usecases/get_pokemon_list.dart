@@ -7,7 +7,7 @@ import 'package:pokedex_app/features/pokemon/domain/repository/pokemon_repositor
 part 'get_pokemon_list.freezed.dart';
 
 /// Retrieves a paginated list of Pokemon from the repository.
-final class GetPokemonList
+interface class GetPokemonList
     implements UseCase<List<PokemonListItem>, GetPokemonListParams> {
   const GetPokemonList(this._repository);
 
