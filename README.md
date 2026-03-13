@@ -104,7 +104,7 @@ Se han implementado diversas capas para asegurar la estabilidad y protección de
 
 ## ⚙️ Pipeline de Integración Continua (CI/CD)
 
-Para garantizar la calidad de un rol **Senior**, este proyecto incluye una pipeline automatizada mediante **GitHub Actions** que se ejecuta en cada `push` y `pull_request`:
+Para garantizar la calidad del código, este proyecto incluye una pipeline automatizada mediante **GitHub Actions** que se ejecuta en cada `push` y `pull_request`:
 
 1.  **Análisis Dinámico & Linting**: Verificación automática de reglas de estilo y buenas prácticas mediante `flutter analyze`.
 2.  **Tests Automatizados**: Ejecución de la suite completa de pruebas unitarias y de repositorio.
