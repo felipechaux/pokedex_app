@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex_app/l10n/app_localizations.dart';
 
 import 'package:pokedex_app/config/router/app_router.dart';
 
@@ -12,6 +13,8 @@ class PokemonBottomNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return BottomNavigationBar(
       currentIndex: currentIndex,
       type: BottomNavigationBarType.fixed,
@@ -39,11 +42,11 @@ class PokemonBottomNav extends StatelessWidget {
             break;
         }
       },
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Pokedex'),
-        BottomNavigationBarItem(icon: Icon(Icons.language), label: 'Regiones'),
-        BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'favoritos'),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
+      items: [
+        BottomNavigationBarItem(icon: const Icon(Icons.home), label: l10n.pokedex),
+        BottomNavigationBarItem(icon: const Icon(Icons.language), label: l10n.regions),
+        BottomNavigationBarItem(icon: const Icon(Icons.favorite), label: l10n.favorites),
+        BottomNavigationBarItem(icon: const Icon(Icons.person), label: l10n.profile),
       ],
     );
   }

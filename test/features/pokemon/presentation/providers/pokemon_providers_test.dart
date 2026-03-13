@@ -66,8 +66,7 @@ void main() {
     // Wait for the provider to complete
     final result = await container.read(pokemonListProvider.future);
 
-    // Assert
-    expect(result.items.length, 1);
+    expect(result.items, hasLength(1));
     expect(result.items.first.name, 'bulbasaur');
     expect(result.offset, 0);
   });
@@ -90,7 +89,7 @@ void main() {
 
     // Assert
     final state = container.read(pokemonListProvider).value;
-    expect(state?.items.length, 2);
+    expect(state?.items, hasLength(2));
     expect(state?.items[1].name, 'ivysaur');
     expect(state?.offset, 20);
   });

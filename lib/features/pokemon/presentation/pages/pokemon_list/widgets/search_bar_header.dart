@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex_app/l10n/app_localizations.dart';
 
 class SearchBarHeader extends StatelessWidget {
   const SearchBarHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
@@ -18,12 +21,12 @@ class SearchBarHeader extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                   border: Border.all(color: Colors.grey[200]!),
                 ),
-                child: const TextField(
+                child: TextField(
                   decoration: InputDecoration(
-                    hintText: 'Procurar Pokémon...',
-                    prefixIcon: Icon(Icons.search, color: Colors.grey),
+                    hintText: l10n.searchPlaceholder,
+                    prefixIcon: const Icon(Icons.search, color: Colors.grey),
                     border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(
+                    contentPadding: const EdgeInsets.symmetric(
                       horizontal: 20,
                       vertical: 15,
                     ),

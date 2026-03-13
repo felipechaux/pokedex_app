@@ -1,9 +1,9 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:pokedex_app/core/providers/locale_provider.dart';
 
 import 'package:pokedex_app/core/errors/failures.dart';
-import 'package:pokedex_app/core/network/dio_provider.dart';
 import 'package:pokedex_app/core/network/network_info.dart';
 import 'package:pokedex_app/core/providers/storage_providers.dart';
 import 'package:pokedex_app/features/pokemon/data/data_sources/local/pokemon_local_data_source.dart';
@@ -14,6 +14,8 @@ import 'package:pokedex_app/features/pokemon/domain/usecases/get_pokemon_detail.
 import 'package:pokedex_app/features/pokemon/domain/usecases/get_pokemon_list.dart';
 import 'package:pokedex_app/features/pokemon/domain/usecases/manage_favorites.dart';
 import 'package:pokedex_app/features/pokemon/domain/entities/pokemon_list_item.dart';
+
+import 'package:pokedex_app/core/network/dio_provider.dart';
 
 part 'pokemon_providers.g.dart';
 part 'pokemon_providers.freezed.dart';
@@ -129,7 +131,8 @@ Future<PokemonDetailState> pokemonDetail(
   required int id,
 }) async {
   final useCase = ref.watch(getPokemonDetailProvider);
-  final pokemon = await useCase(GetPokemonDetailParams(id: id));
+  final language = ref.watch(localeStateProvider).languageCode;
+  final pokemon = await useCase(GetPokemonDetailParams(id: id, language: language));
   return PokemonDetailState(
     id: pokemon.id,
     name: pokemon.name,
@@ -205,8 +208,9 @@ class PokemonListNotifier extends _$PokemonListNotifier {
   Future<List<PokemonListItemState>> _fetchPage(int offset) async {
     if (!ref.mounted) return [];
     final useCase = ref.read(getPokemonListProvider);
+    final language = ref.read(localeStateProvider).languageCode;
     final items = await useCase(
-      GetPokemonListParams(limit: 20, offset: offset),
+      GetPokemonListParams(limit: 20, offset: offset, language: language),
     );
     return items
         .map(
@@ -234,50 +238,37 @@ abstract class PokemonListPageState with _$PokemonListPageState {
 // View-model state classes
 // ---------------------------------------------------------------------------
 
-class PokemonListItemState {
-  const PokemonListItemState({
-    required this.id,
-    required this.name,
-    required this.imageUrl,
-    required this.types,
-  });
-
-  final int id;
-  final String name;
-  final String imageUrl;
-  final List<String> types;
+@freezed
+abstract class PokemonListItemState with _$PokemonListItemState {
+  const factory PokemonListItemState({
+    required int id,
+    required String name,
+    required String imageUrl,
+    required List<String> types,
+  }) = _PokemonListItemState;
 }
 
-class PokemonDetailState {
-  const PokemonDetailState({
-    required this.id,
-    required this.name,
-    required this.imageUrl,
-    required this.types,
-    required this.height,
-    required this.weight,
-    required this.stats,
-    required this.abilities,
-    required this.flavorText,
-    required this.category,
-    required this.genderRate,
-  });
-
-  final int id;
-  final String name;
-  final String imageUrl;
-  final List<String> types;
-  final int height;
-  final int weight;
-  final List<StatState> stats;
-  final List<String> abilities;
-  final String flavorText;
-  final String category;
-  final int genderRate;
+@freezed
+abstract class PokemonDetailState with _$PokemonDetailState {
+  const factory PokemonDetailState({
+    required int id,
+    required String name,
+    required String imageUrl,
+    required List<String> types,
+    required int height,
+    required int weight,
+    required List<StatState> stats,
+    required List<String> abilities,
+    required String flavorText,
+    required String category,
+    required int genderRate,
+  }) = _PokemonDetailState;
 }
 
-class StatState {
-  const StatState({required this.name, required this.baseStat});
-  final String name;
-  final int baseStat;
+@freezed
+abstract class StatState with _$StatState {
+  const factory StatState({
+    required String name,
+    required int baseStat,
+  }) = _StatState;
 }

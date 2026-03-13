@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:pokedex_app/l10n/app_localizations.dart';
 import 'package:pokedex_app/config/theme/app_theme.dart';
 import 'package:pokedex_app/features/pokemon/presentation/providers/pokemon_providers.dart';
 import 'package:pokedex_app/features/pokemon/presentation/widgets/type_badge.dart';
@@ -13,6 +14,7 @@ class DetailContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final primaryType = pokemon.types.isNotEmpty ? pokemon.types.first : 'normal';
     final baseColor = primaryType.typeColor;
     final textTheme = Theme.of(context).textTheme;
@@ -124,22 +126,22 @@ class DetailContent extends StatelessWidget {
                   mainAxisSpacing: 16,
                   children: [
                     StatsBox(
-                      label: 'PESO',
+                      label: l10n.weightLabel,
                       value: '${pokemon.weight / 10} kg',
                       icon: Icons.scale_outlined,
                     ),
                     StatsBox(
-                      label: 'ALTURA',
+                      label: l10n.heightLabel,
                       value: '${pokemon.height / 10} m',
                       icon: Icons.height,
                     ),
                     StatsBox(
-                      label: 'CATEGORÍA',
+                      label: l10n.categoryLabel,
                       value: pokemon.category.toUpperCase(),
                       icon: Icons.grid_view_outlined,
                     ),
                     StatsBox(
-                      label: 'HABILIDAD',
+                      label: l10n.abilityLabel,
                       value: pokemon.abilities.isNotEmpty
                           ? _capitalize(pokemon.abilities.first)
                           : '-',
@@ -151,10 +153,10 @@ class DetailContent extends StatelessWidget {
                 const SizedBox(height: 32),
 
                 // Gender Distribution
-                const Center(
+                Center(
                   child: Text(
-                    'GENERO',
-                    style: TextStyle(
+                    l10n.genderLabel,
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1.2,
@@ -169,7 +171,7 @@ class DetailContent extends StatelessWidget {
 
                 // Weaknesses (Debilidades)
                 Text(
-                  'Debilidades',
+                  l10n.weaknessesLabel,
                   style: textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,

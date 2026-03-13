@@ -59,7 +59,7 @@ void main() {
       final result = await repository.getPokemonList(limit: 20, offset: 0);
 
       // Assert
-      expect(result.length, 1);
+      expect(result, hasLength(1));
       expect(result.first.name, 'bulbasaur');
     });
   });

@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$GetPokemonListParams {
 
- int get limit; int get offset;
+ int get limit; int get offset; String get language;
 /// Create a copy of GetPokemonListParams
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $GetPokemonListParamsCopyWith<GetPokemonListParams> get copyWith => _$GetPokemon
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetPokemonListParams&&(identical(other.limit, limit) || other.limit == limit)&&(identical(other.offset, offset) || other.offset == offset));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetPokemonListParams&&(identical(other.limit, limit) || other.limit == limit)&&(identical(other.offset, offset) || other.offset == offset)&&(identical(other.language, language) || other.language == language));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,limit,offset);
+int get hashCode => Object.hash(runtimeType,limit,offset,language);
 
 @override
 String toString() {
-  return 'GetPokemonListParams(limit: $limit, offset: $offset)';
+  return 'GetPokemonListParams(limit: $limit, offset: $offset, language: $language)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $GetPokemonListParamsCopyWith<$Res>  {
   factory $GetPokemonListParamsCopyWith(GetPokemonListParams value, $Res Function(GetPokemonListParams) _then) = _$GetPokemonListParamsCopyWithImpl;
 @useResult
 $Res call({
- int limit, int offset
+ int limit, int offset, String language
 });
 
 
@@ -62,11 +62,12 @@ class _$GetPokemonListParamsCopyWithImpl<$Res>
 
 /// Create a copy of GetPokemonListParams
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? limit = null,Object? offset = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? limit = null,Object? offset = null,Object? language = null,}) {
   return _then(_self.copyWith(
 limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
 as int,offset: null == offset ? _self.offset : offset // ignore: cast_nullable_to_non_nullable
-as int,
+as int,language: null == language ? _self.language : language // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 
@@ -151,10 +152,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int limit,  int offset)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int limit,  int offset,  String language)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _GetPokemonListParams() when $default != null:
-return $default(_that.limit,_that.offset);case _:
+return $default(_that.limit,_that.offset,_that.language);case _:
   return orElse();
 
 }
@@ -172,10 +173,10 @@ return $default(_that.limit,_that.offset);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int limit,  int offset)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int limit,  int offset,  String language)  $default,) {final _that = this;
 switch (_that) {
 case _GetPokemonListParams():
-return $default(_that.limit,_that.offset);case _:
+return $default(_that.limit,_that.offset,_that.language);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -192,10 +193,10 @@ return $default(_that.limit,_that.offset);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int limit,  int offset)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int limit,  int offset,  String language)?  $default,) {final _that = this;
 switch (_that) {
 case _GetPokemonListParams() when $default != null:
-return $default(_that.limit,_that.offset);case _:
+return $default(_that.limit,_that.offset,_that.language);case _:
   return null;
 
 }
@@ -207,11 +208,12 @@ return $default(_that.limit,_that.offset);case _:
 
 
 class _GetPokemonListParams implements GetPokemonListParams {
-  const _GetPokemonListParams({this.limit = 20, this.offset = 0});
+  const _GetPokemonListParams({this.limit = 20, this.offset = 0, this.language = 'en'});
   
 
 @override@JsonKey() final  int limit;
 @override@JsonKey() final  int offset;
+@override@JsonKey() final  String language;
 
 /// Create a copy of GetPokemonListParams
 /// with the given fields replaced by the non-null parameter values.
@@ -223,16 +225,16 @@ _$GetPokemonListParamsCopyWith<_GetPokemonListParams> get copyWith => __$GetPoke
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GetPokemonListParams&&(identical(other.limit, limit) || other.limit == limit)&&(identical(other.offset, offset) || other.offset == offset));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GetPokemonListParams&&(identical(other.limit, limit) || other.limit == limit)&&(identical(other.offset, offset) || other.offset == offset)&&(identical(other.language, language) || other.language == language));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,limit,offset);
+int get hashCode => Object.hash(runtimeType,limit,offset,language);
 
 @override
 String toString() {
-  return 'GetPokemonListParams(limit: $limit, offset: $offset)';
+  return 'GetPokemonListParams(limit: $limit, offset: $offset, language: $language)';
 }
 
 
@@ -243,7 +245,7 @@ abstract mixin class _$GetPokemonListParamsCopyWith<$Res> implements $GetPokemon
   factory _$GetPokemonListParamsCopyWith(_GetPokemonListParams value, $Res Function(_GetPokemonListParams) _then) = __$GetPokemonListParamsCopyWithImpl;
 @override @useResult
 $Res call({
- int limit, int offset
+ int limit, int offset, String language
 });
 
 
@@ -260,11 +262,12 @@ class __$GetPokemonListParamsCopyWithImpl<$Res>
 
 /// Create a copy of GetPokemonListParams
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? limit = null,Object? offset = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? limit = null,Object? offset = null,Object? language = null,}) {
   return _then(_GetPokemonListParams(
 limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
 as int,offset: null == offset ? _self.offset : offset // ignore: cast_nullable_to_non_nullable
-as int,
+as int,language: null == language ? _self.language : language // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

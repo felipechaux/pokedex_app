@@ -386,7 +386,7 @@ final class FavoritesProvider
   Favorites create() => Favorites();
 }
 
-String _$favoritesHash() => r'e185f9b800bfadd42e4d5b8cf87bf350157b42f2';
+String _$favoritesHash() => r'32e2d8a6ec05848ca4108204fade57fdc15fa900';
 
 abstract class _$Favorites extends $AsyncNotifier<List<PokemonListItemState>> {
   FutureOr<List<PokemonListItemState>> build();

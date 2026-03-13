@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:pokedex_app/l10n/app_localizations.dart';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:pokedex_app/core/errors/failures.dart';
@@ -18,6 +19,7 @@ class PokemonListPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
     final listState = ref.watch(pokemonListProvider);
     final scrollController = useScrollController();
 
@@ -49,8 +51,8 @@ class PokemonListPage extends HookConsumerWidget {
       body: SafeArea(
         child: isOffline
             ? PokemonListError(
-                error: const Failure.network(
-                  message: 'Sin conexión a internet',
+                error: Failure.network(
+                  message: l10n.noInternet,
                 ),
                 onRetry: () => ref.invalidate(connectivityProvider),
               )

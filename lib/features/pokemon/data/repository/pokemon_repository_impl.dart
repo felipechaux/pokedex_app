@@ -23,6 +23,7 @@ final class PokemonRepositoryImpl implements PokemonRepository {
   Future<List<PokemonListItem>> getPokemonList({
     int limit = 20,
     int offset = 0,
+    String language = 'en',
   }) async {
     try {
       final response = await _remoteDataSource.getPokemonList(
@@ -75,11 +76,14 @@ final class PokemonRepositoryImpl implements PokemonRepository {
   }
 
   @override
-  Future<Pokemon> getPokemonDetail({required int id}) async {
+  Future<Pokemon> getPokemonDetail({
+    required int id,
+    String language = 'en',
+  }) async {
     try {
       final model = await _remoteDataSource.getPokemonDetail(id);
       final species = await _remoteDataSource.getPokemonSpecies(id);
-      return _toDomainEntity(model, species);
+      return _toDomainEntity(model, species, language);
     } on DioException catch (e) {
       throw _handleDioError(e);
     } catch (e) {
@@ -94,10 +98,14 @@ final class PokemonRepositoryImpl implements PokemonRepository {
   // Mappers
   // ---------------------------------------------------------------------------
 
-  Pokemon _toDomainEntity(PokemonModel model, PokemonSpeciesModel species) {
-    // Find flavor text in Spanish or English fallback
+  Pokemon _toDomainEntity(
+    PokemonModel model,
+    PokemonSpeciesModel species,
+    String language,
+  ) {
+    // Find flavor text in requested language or English fallback
     final flavorText = species.flavorTextEntries
-            .where((e) => e.language.name == 'es')
+            .where((e) => e.language.name == language)
             .firstOrNull
             ?.flavorText
             .replaceAll('\n', ' ')
@@ -111,7 +119,7 @@ final class PokemonRepositoryImpl implements PokemonRepository {
         '';
 
     final category = species.genera
-            .where((e) => e.language.name == 'es')
+            .where((e) => e.language.name == language)
             .firstOrNull
             ?.genus ??
         species.genera

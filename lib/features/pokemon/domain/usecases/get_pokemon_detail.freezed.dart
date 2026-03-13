@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$GetPokemonDetailParams {
 
- int get id;
+ int get id; String get language;
 /// Create a copy of GetPokemonDetailParams
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $GetPokemonDetailParamsCopyWith<GetPokemonDetailParams> get copyWith => _$GetPok
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetPokemonDetailParams&&(identical(other.id, id) || other.id == id));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetPokemonDetailParams&&(identical(other.id, id) || other.id == id)&&(identical(other.language, language) || other.language == language));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id);
+int get hashCode => Object.hash(runtimeType,id,language);
 
 @override
 String toString() {
-  return 'GetPokemonDetailParams(id: $id)';
+  return 'GetPokemonDetailParams(id: $id, language: $language)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $GetPokemonDetailParamsCopyWith<$Res>  {
   factory $GetPokemonDetailParamsCopyWith(GetPokemonDetailParams value, $Res Function(GetPokemonDetailParams) _then) = _$GetPokemonDetailParamsCopyWithImpl;
 @useResult
 $Res call({
- int id
+ int id, String language
 });
 
 
@@ -62,10 +62,11 @@ class _$GetPokemonDetailParamsCopyWithImpl<$Res>
 
 /// Create a copy of GetPokemonDetailParams
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? language = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,
+as int,language: null == language ? _self.language : language // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 
@@ -150,10 +151,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String language)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _GetPokemonDetailParams() when $default != null:
-return $default(_that.id);case _:
+return $default(_that.id,_that.language);case _:
   return orElse();
 
 }
@@ -171,10 +172,10 @@ return $default(_that.id);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String language)  $default,) {final _that = this;
 switch (_that) {
 case _GetPokemonDetailParams():
-return $default(_that.id);case _:
+return $default(_that.id,_that.language);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -191,10 +192,10 @@ return $default(_that.id);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String language)?  $default,) {final _that = this;
 switch (_that) {
 case _GetPokemonDetailParams() when $default != null:
-return $default(_that.id);case _:
+return $default(_that.id,_that.language);case _:
   return null;
 
 }
@@ -206,10 +207,11 @@ return $default(_that.id);case _:
 
 
 class _GetPokemonDetailParams implements GetPokemonDetailParams {
-  const _GetPokemonDetailParams({required this.id});
+  const _GetPokemonDetailParams({required this.id, this.language = 'en'});
   
 
 @override final  int id;
+@override@JsonKey() final  String language;
 
 /// Create a copy of GetPokemonDetailParams
 /// with the given fields replaced by the non-null parameter values.
@@ -221,16 +223,16 @@ _$GetPokemonDetailParamsCopyWith<_GetPokemonDetailParams> get copyWith => __$Get
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GetPokemonDetailParams&&(identical(other.id, id) || other.id == id));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GetPokemonDetailParams&&(identical(other.id, id) || other.id == id)&&(identical(other.language, language) || other.language == language));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id);
+int get hashCode => Object.hash(runtimeType,id,language);
 
 @override
 String toString() {
-  return 'GetPokemonDetailParams(id: $id)';
+  return 'GetPokemonDetailParams(id: $id, language: $language)';
 }
 
 
@@ -241,7 +243,7 @@ abstract mixin class _$GetPokemonDetailParamsCopyWith<$Res> implements $GetPokem
   factory _$GetPokemonDetailParamsCopyWith(_GetPokemonDetailParams value, $Res Function(_GetPokemonDetailParams) _then) = __$GetPokemonDetailParamsCopyWithImpl;
 @override @useResult
 $Res call({
- int id
+ int id, String language
 });
 
 
@@ -258,10 +260,11 @@ class __$GetPokemonDetailParamsCopyWithImpl<$Res>
 
 /// Create a copy of GetPokemonDetailParams
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? language = null,}) {
   return _then(_GetPokemonDetailParams(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,
+as int,language: null == language ? _self.language : language // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex_app/l10n/app_localizations.dart';
 
 class PokemonListError extends StatelessWidget {
   const PokemonListError({
@@ -12,9 +13,7 @@ class PokemonListError extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String title = 'Algo salió mal...';
-    String message =
-        'No pudimos cargar la información en este momento. Verifica tu conexión o intenta nuevamente más tarde.';
+    final l10n = AppLocalizations.of(context)!;
     const String asset = 'assets/images/empty_state.png';
 
     return Padding(
@@ -31,7 +30,7 @@ class PokemonListError extends StatelessWidget {
             ),
             const SizedBox(height: 32),
             Text(
-              title,
+              l10n.errorTitle,
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w800,
@@ -42,7 +41,7 @@ class PokemonListError extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              message,
+              l10n.errorMessage,
               style: const TextStyle(
                 fontSize: 15,
                 color: Color(0xFF666666),
@@ -63,9 +62,9 @@ class PokemonListError extends StatelessWidget {
                   ),
                   elevation: 0,
                 ),
-                child: const Text(
-                  'Reintentar',
-                  style: TextStyle(
+                child: Text(
+                  l10n.tryAgain,
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,

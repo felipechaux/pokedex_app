@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pokedex_app/features/pokemon/presentation/providers/pokemon_providers.dart';
 import 'package:pokedex_app/features/pokemon/presentation/widgets/pokemon_card.dart';
 import 'package:pokedex_app/features/pokemon/presentation/pages/pokemon_list/widgets/pokemon_bottom_nav.dart';
+import 'package:pokedex_app/l10n/app_localizations.dart';
 
 class FavoritesPage extends ConsumerWidget {
   const FavoritesPage({super.key});
@@ -10,10 +11,18 @@ class FavoritesPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final favoritesAsync = ref.watch(favoritesProvider);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        title: Text(
+          l10n.favorites,
+          style: const TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
@@ -53,7 +62,7 @@ class FavoritesPage extends ConsumerWidget {
                 ),
               ),
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (err, _) => Center(child: Text('Error: $err')),
+        error: (err, _) => Center(child: Text('${l10n.errorTitle}: $err')),
       ),
       bottomNavigationBar: const PokemonBottomNav(currentIndex: 2),
     );
@@ -80,6 +89,7 @@ class _EmptyFavorites extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32),
       child: Column(
@@ -92,10 +102,10 @@ class _EmptyFavorites extends StatelessWidget {
             fit: BoxFit.contain,
           ),
           const SizedBox(height: 32),
-          const Text(
-            'No has marcado ningún Pokémon como favorito',
+          Text(
+            l10n.noFavoritesMessage,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
               color: Colors.black87,
@@ -103,10 +113,10 @@ class _EmptyFavorites extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          const Text(
-            'Haz clic en el ícono de corazón de tus Pokémon favoritos y aparecerán aquí.',
+          Text(
+            l10n.noFavoritesInstruction,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 16, color: Colors.black54, height: 1.5),
+            style: const TextStyle(fontSize: 16, color: Colors.black54, height: 1.5),
           ),
         ],
       ),

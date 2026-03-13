@@ -18,6 +18,7 @@ interface class GetPokemonList
       _repository.getPokemonList(
         limit: params.limit,
         offset: params.offset,
+        language: params.language,
       );
 }
 
@@ -26,5 +27,6 @@ abstract class GetPokemonListParams with _$GetPokemonListParams {
   const factory GetPokemonListParams({
     @Default(20) int limit,
     @Default(0) int offset,
+    @Default('en') String language,
   }) = _GetPokemonListParams;
 }

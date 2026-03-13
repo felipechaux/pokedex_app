@@ -10,10 +10,14 @@ abstract interface class PokemonRepository {
   Future<List<PokemonListItem>> getPokemonList({
     int limit = 20,
     int offset = 0,
+    String language = 'en',
   });
 
   /// Fetches the full detail of a single Pokemon by [id].
-  Future<Pokemon> getPokemonDetail({required int id});
+  Future<Pokemon> getPokemonDetail({
+    required int id,
+    String language = 'en',
+  });
 
   /// Returns all favorite Pokemon objects.
   Future<List<PokemonListItem>> getFavorites();

@@ -15,11 +15,16 @@ interface class GetPokemonDetail
 
   @override
   Future<Pokemon> call(GetPokemonDetailParams params) =>
-      _repository.getPokemonDetail(id: params.id);
+      _repository.getPokemonDetail(
+        id: params.id,
+        language: params.language,
+      );
 }
 
 @freezed
 abstract class GetPokemonDetailParams with _$GetPokemonDetailParams {
-  const factory GetPokemonDetailParams({required int id}) =
-      _GetPokemonDetailParams;
+  const factory GetPokemonDetailParams({
+    required int id,
+    @Default('en') String language,
+  }) = _GetPokemonDetailParams;
 }

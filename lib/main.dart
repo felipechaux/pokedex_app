@@ -3,6 +3,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'config/router/app_router.dart';
 import 'config/theme/app_theme.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:pokedex_app/l10n/app_localizations.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:pokedex_app/core/providers/locale_provider.dart';
 
 import 'dart:io';
 import 'package:flutter/foundation.dart';
@@ -65,17 +69,32 @@ void main() async {
 }
 
 /// Root widget of the Pokedex application.
-class PokedexApp extends StatelessWidget {
+class PokedexApp extends HookConsumerWidget {
   const PokedexApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final locale = ref.watch(localeStateProvider);
+
+    useEffect(() {
+      Future.microtask(() => ref.read(localeStateProvider.notifier).init());
+      return null;
+    }, []);
+
     return MaterialApp(
-      title: 'Pokédex',
+      onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
       onGenerateRoute: generateRoute,
       initialRoute: AppRoutes.splash,
+      locale: locale,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }
