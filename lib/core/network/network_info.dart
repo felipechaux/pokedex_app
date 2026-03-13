@@ -18,7 +18,7 @@ class NetworkInfo {
   /// Deep verification check (async).
   Future<bool> get isConnected async {
     if (!isConnectedSync) return false;
-    
+
     try {
       final checker = InternetConnectionChecker.createInstance(
         checkTimeout: const Duration(seconds: 1),
@@ -43,15 +43,11 @@ Stream<List<ConnectivityResult>> connectivity(Ref ref) async* {
 @riverpod
 NetworkInfo networkInfo(Ref ref) {
   final info = NetworkInfo();
-  
+
   // Listen to connectivity changes to update the synchronous state.
-  ref.listen(
-    connectivityProvider,
-    (previous, next) {
-      next.whenData(info.updateConnectionStatus);
-    },
-    fireImmediately: true,
-  );
-  
+  ref.listen(connectivityProvider, (previous, next) {
+    next.whenData(info.updateConnectionStatus);
+  }, fireImmediately: true);
+
   return info;
 }

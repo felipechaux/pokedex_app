@@ -11,10 +11,13 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:pokedex_app/core/network/network_info.dart';
 
 class MockGetPokemonList extends Mock implements GetPokemonList {}
+
 class MockGetPokemonDetail extends Mock implements GetPokemonDetail {}
+
 class MockNetworkInfo extends Mock implements NetworkInfo {}
 
-class FakeGetPokemonDetailParams extends Fake implements GetPokemonDetailParams {}
+class FakeGetPokemonDetailParams extends Fake
+    implements GetPokemonDetailParams {}
 
 void main() {
   late ProviderContainer container;
@@ -40,7 +43,9 @@ void main() {
         getPokemonListProvider.overrideWithValue(mockGetPokemonList),
         getPokemonDetailProvider.overrideWithValue(mockGetPokemonDetail),
         networkInfoProvider.overrideWithValue(mockNetworkInfo),
-        connectivityProvider.overrideWith((ref) => Stream.value([ConnectivityResult.wifi])),
+        connectivityProvider.overrideWith(
+          (ref) => Stream.value([ConnectivityResult.wifi]),
+        ),
       ],
     );
   });
@@ -50,12 +55,19 @@ void main() {
   });
 
   final tPokemonItems = [
-    const PokemonListItem(id: 1, name: 'bulbasaur', imageUrl: 'url', types: ['grass']),
+    const PokemonListItem(
+      id: 1,
+      name: 'bulbasaur',
+      imageUrl: 'url',
+      types: ['grass'],
+    ),
   ];
 
   test('initial state should be loading and then data', () async {
     // Arrange
-    when(() => mockGetPokemonList(any())).thenAnswer((_) async => tPokemonItems);
+    when(
+      () => mockGetPokemonList(any()),
+    ).thenAnswer((_) async => tPokemonItems);
 
     // Assert the provider starts in loading state
     expect(
@@ -73,16 +85,25 @@ void main() {
 
   test('fetchNextPage should append items', () async {
     // Arrange
-    when(() => mockGetPokemonList(any())).thenAnswer((_) async => tPokemonItems);
+    when(
+      () => mockGetPokemonList(any()),
+    ).thenAnswer((_) async => tPokemonItems);
 
     // Initialize data
     await container.read(pokemonListProvider.future);
 
     // Mock next page
     final tNextPageItems = [
-      const PokemonListItem(id: 2, name: 'ivysaur', imageUrl: 'url', types: ['grass']),
+      const PokemonListItem(
+        id: 2,
+        name: 'ivysaur',
+        imageUrl: 'url',
+        types: ['grass'],
+      ),
     ];
-    when(() => mockGetPokemonList(any())).thenAnswer((_) async => tNextPageItems);
+    when(
+      () => mockGetPokemonList(any()),
+    ).thenAnswer((_) async => tNextPageItems);
 
     // Act
     await container.read(pokemonListProvider.notifier).fetchNextPage();

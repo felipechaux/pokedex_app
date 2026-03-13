@@ -116,7 +116,11 @@ class _EmptyFavorites extends StatelessWidget {
           Text(
             l10n.noFavoritesInstruction,
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 16, color: Colors.black54, height: 1.5),
+            style: const TextStyle(
+              fontSize: 16,
+              color: Colors.black54,
+              height: 1.5,
+            ),
           ),
         ],
       ),

@@ -5,10 +5,7 @@ import 'package:pokedex_app/l10n/app_localizations.dart';
 import 'package:pokedex_app/config/router/app_router.dart';
 
 class PokemonBottomNav extends StatelessWidget {
-  const PokemonBottomNav({
-    super.key,
-    this.currentIndex = 0,
-  });
+  const PokemonBottomNav({super.key, this.currentIndex = 0});
 
   final int currentIndex;
 
@@ -26,8 +23,10 @@ class PokemonBottomNav extends StatelessWidget {
       selectedItemColor: theme.colorScheme.primary,
       unselectedItemColor: isDark ? Colors.grey : const Color(0xFF2E3133),
       showUnselectedLabels: true,
-      selectedLabelStyle:
-          const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+      selectedLabelStyle: const TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 12,
+      ),
       unselectedLabelStyle: const TextStyle(fontSize: 12),
       onTap: (index) {
         HapticFeedback.lightImpact();
@@ -49,10 +48,22 @@ class PokemonBottomNav extends StatelessWidget {
         }
       },
       items: [
-        BottomNavigationBarItem(icon: const Icon(Icons.home), label: l10n.pokedex),
-        BottomNavigationBarItem(icon: const Icon(Icons.language), label: l10n.regions),
-        BottomNavigationBarItem(icon: const Icon(Icons.favorite), label: l10n.favorites),
-        BottomNavigationBarItem(icon: const Icon(Icons.person), label: l10n.profile),
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.home),
+          label: l10n.pokedex,
+        ),
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.language),
+          label: l10n.regions,
+        ),
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.favorite),
+          label: l10n.favorites,
+        ),
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.person),
+          label: l10n.profile,
+        ),
       ],
     );
   }

@@ -14,10 +14,7 @@ abstract interface class PokemonRepository {
   });
 
   /// Fetches the full detail of a single Pokemon by [id].
-  Future<Pokemon> getPokemonDetail({
-    required int id,
-    String language = 'en',
-  });
+  Future<Pokemon> getPokemonDetail({required int id, String language = 'en'});
 
   /// Returns all favorite Pokemon objects.
   Future<List<PokemonListItem>> getFavorites();

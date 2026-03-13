@@ -18,7 +18,9 @@ class FilterBottomSheet extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
     final initialTypes = ref.read(pokemonFilterProvider).selectedTypes;
-    final selectedTypes = useState<List<String>>(List<String>.from(initialTypes));
+    final selectedTypes = useState<List<String>>(
+      List<String>.from(initialTypes),
+    );
 
     return Container(
       constraints: BoxConstraints(

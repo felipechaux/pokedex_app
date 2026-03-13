@@ -13,9 +13,23 @@ class FilterTypeList extends StatelessWidget {
   });
 
   static const _types = [
-    'water', 'fire', 'grass', 'electric', 'ice', 'fighting', 'poison',
-    'ground', 'flying', 'psychic', 'bug', 'rock', 'ghost', 'dragon',
-    'steel', 'fairy', 'normal',
+    'water',
+    'fire',
+    'grass',
+    'electric',
+    'ice',
+    'fighting',
+    'poison',
+    'ground',
+    'flying',
+    'psychic',
+    'bug',
+    'rock',
+    'ghost',
+    'dragon',
+    'steel',
+    'fairy',
+    'normal',
   ];
 
   @override
@@ -23,25 +37,25 @@ class FilterTypeList extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
 
     String getTypeName(String type) => switch (type) {
-          'water' => l10n.typeWater,
-          'fire' => l10n.typeFire,
-          'grass' => l10n.typeGrass,
-          'electric' => l10n.typeElectric,
-          'ice' => l10n.typeIce,
-          'fighting' => l10n.typeFighting,
-          'poison' => l10n.typePoison,
-          'ground' => l10n.typeGround,
-          'flying' => l10n.typeFlying,
-          'psychic' => l10n.typePsychic,
-          'bug' => l10n.typeBug,
-          'rock' => l10n.typeRock,
-          'ghost' => l10n.typeGhost,
-          'dragon' => l10n.typeDragon,
-          'steel' => l10n.typeSteel,
-          'fairy' => l10n.typeFairy,
-          'normal' => l10n.typeNormal,
-          _ => type,
-        };
+      'water' => l10n.typeWater,
+      'fire' => l10n.typeFire,
+      'grass' => l10n.typeGrass,
+      'electric' => l10n.typeElectric,
+      'ice' => l10n.typeIce,
+      'fighting' => l10n.typeFighting,
+      'poison' => l10n.typePoison,
+      'ground' => l10n.typeGround,
+      'flying' => l10n.typeFlying,
+      'psychic' => l10n.typePsychic,
+      'bug' => l10n.typeBug,
+      'rock' => l10n.typeRock,
+      'ghost' => l10n.typeGhost,
+      'dragon' => l10n.typeDragon,
+      'steel' => l10n.typeSteel,
+      'fairy' => l10n.typeFairy,
+      'normal' => l10n.typeNormal,
+      _ => type,
+    };
 
     return ListView.builder(
       shrinkWrap: true,

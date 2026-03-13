@@ -6,7 +6,9 @@ part 'storage_providers.g.dart';
 
 @Riverpod(keepAlive: true)
 SharedPreferences sharedPrefs(Ref ref) {
-  throw UnimplementedError('SharedPreferences must be overridden in ProviderScope');
+  throw UnimplementedError(
+    'SharedPreferences must be overridden in ProviderScope',
+  );
 }
 
 @Riverpod(keepAlive: true)

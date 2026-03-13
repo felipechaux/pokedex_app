@@ -41,15 +41,17 @@ class PokemonDetailPage extends ConsumerWidget {
               HapticFeedback.lightImpact();
               final detail = detailAsync.value;
               if (detail == null) return;
-              
-              ref.read(favoritesProvider.notifier).toggle(
-                PokemonListItemState(
-                  id: detail.id,
-                  name: detail.name,
-                  imageUrl: detail.imageUrl,
-                  types: detail.types,
-                ),
-              );
+
+              ref
+                  .read(favoritesProvider.notifier)
+                  .toggle(
+                    PokemonListItemState(
+                      id: detail.id,
+                      name: detail.name,
+                      imageUrl: detail.imageUrl,
+                      types: detail.types,
+                    ),
+                  );
             },
           ),
           const SizedBox(width: 8),

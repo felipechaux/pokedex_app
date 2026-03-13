@@ -55,14 +55,17 @@ class FavoriteAnimationOverlay extends HookWidget {
           return AnimatedBuilder(
             animation: animation,
             builder: (context, _) {
-              if (controller.value == 0 || controller.value == 1) return const SizedBox.shrink();
-              
+              if (controller.value == 0 || controller.value == 1) {
+                return const SizedBox.shrink();
+              }
+
               final distance = 15.0 + (animation.value * 20.0);
               final opacity = 1.0 - animation.value;
               final size = 4.0 * (1.0 - animation.value);
 
               return Positioned(
-                left: math.cos(angle) * distance + 10, // Center offset adjustment
+                left:
+                    math.cos(angle) * distance + 10, // Center offset adjustment
                 top: math.sin(angle) * distance + 10,
                 child: Opacity(
                   opacity: opacity,
@@ -73,7 +76,7 @@ class FavoriteAnimationOverlay extends HookWidget {
                       color: Colors.yellowAccent,
                       shape: BoxShape.circle,
                       boxShadow: [
-                         BoxShadow(color: Colors.white, blurRadius: 2),
+                        BoxShadow(color: Colors.white, blurRadius: 2),
                       ],
                     ),
                   ),
@@ -82,12 +85,9 @@ class FavoriteAnimationOverlay extends HookWidget {
             },
           );
         }),
-        
+
         // Pulsing Icon
-        Transform.scale(
-          scale: isFavorite ? pulseScale : 1.0,
-          child: child,
-        ),
+        Transform.scale(scale: isFavorite ? pulseScale : 1.0, child: child),
       ],
     );
   }

@@ -47,9 +47,8 @@ class OnboardingPage extends HookConsumerWidget {
                 controller: pageController,
                 itemCount: _onboardingPages.length,
                 onPageChanged: (index) => currentPage.value = index,
-                itemBuilder: (context, index) => _OnboardingContent(
-                  data: _onboardingPages[index],
-                ),
+                itemBuilder: (context, index) =>
+                    _OnboardingContent(data: _onboardingPages[index]),
               ),
             ),
 
@@ -120,18 +119,18 @@ class _OnboardingContent extends StatelessWidget {
             data.title,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
           ),
           const SizedBox(height: 16),
           Text(
             data.description,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.black54,
-                  height: 1.5,
-                ),
+              color: Colors.black54,
+              height: 1.5,
+            ),
           ),
         ],
       ),

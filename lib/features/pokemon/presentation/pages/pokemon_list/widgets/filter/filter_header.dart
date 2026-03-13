@@ -4,11 +4,7 @@ class FilterHeader extends StatelessWidget {
   final String title;
   final VoidCallback onClose;
 
-  const FilterHeader({
-    super.key,
-    required this.title,
-    required this.onClose,
-  });
+  const FilterHeader({super.key, required this.title, required this.onClose});
 
   @override
   Widget build(BuildContext context) {

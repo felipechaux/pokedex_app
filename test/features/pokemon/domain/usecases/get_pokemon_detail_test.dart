@@ -31,8 +31,9 @@ void main() {
 
   test('should get pokemon detail from the repository', () async {
     // Arrange
-    when(() => mockRepository.getPokemonDetail(id: any(named: 'id')))
-        .thenAnswer((_) async => tPokemon);
+    when(
+      () => mockRepository.getPokemonDetail(id: any(named: 'id')),
+    ).thenAnswer((_) async => tPokemon);
 
     // Act
     final result = await useCase(const GetPokemonDetailParams(id: 1));

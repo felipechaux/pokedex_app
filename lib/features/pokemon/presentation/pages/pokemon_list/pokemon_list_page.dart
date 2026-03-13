@@ -54,9 +54,7 @@ class PokemonListPage extends HookConsumerWidget {
       body: SafeArea(
         child: isOffline
             ? PokemonListError(
-                error: Failure.network(
-                  message: l10n.noInternet,
-                ),
+                error: Failure.network(message: l10n.noInternet),
                 onRetry: () => ref.invalidate(connectivityProvider),
               )
             : listState.when(
@@ -84,12 +82,17 @@ class PokemonListPage extends HookConsumerWidget {
                     const SearchBarHeader(),
                     if (filter.isActive)
                       SliverPadding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
                         sliver: SliverToBoxAdapter(
                           child: Row(
                             children: [
                               Text(
-                                l10n.resultsFound(filteredItemsState.value?.length ?? 0),
+                                l10n.resultsFound(
+                                  filteredItemsState.value?.length ?? 0,
+                                ),
                                 style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 14,
@@ -97,7 +100,9 @@ class PokemonListPage extends HookConsumerWidget {
                               ),
                               const Spacer(),
                               TextButton(
-                                onPressed: () => ref.read(pokemonFilterProvider.notifier).clearFilters(),
+                                onPressed: () => ref
+                                    .read(pokemonFilterProvider.notifier)
+                                    .clearFilters(),
                                 child: Text(
                                   l10n.clearFilter,
                                   style: const TextStyle(

@@ -23,40 +23,39 @@ abstract final class AppRoutes {
 Route<dynamic> generateRoute(RouteSettings settings) {
   return switch (settings.name) {
     AppRoutes.splash => MaterialPageRoute<void>(
-        builder: (_) => const SplashPage(),
-        settings: settings,
-      ),
+      builder: (_) => const SplashPage(),
+      settings: settings,
+    ),
     AppRoutes.onboarding => MaterialPageRoute<void>(
-        builder: (_) => const OnboardingPage(),
-        settings: settings,
-      ),
+      builder: (_) => const OnboardingPage(),
+      settings: settings,
+    ),
     AppRoutes.pokemonList => MaterialPageRoute<void>(
-        builder: (_) => const PokemonListPage(),
-        settings: settings,
-      ),
+      builder: (_) => const PokemonListPage(),
+      settings: settings,
+    ),
     AppRoutes.pokemonDetail => MaterialPageRoute<void>(
-        builder: (_) {
-          final id = settings.arguments! as int;
-          return PokemonDetailPage(pokemonId: id);
-        },
-        settings: settings,
-      ),
+      builder: (_) {
+        final id = settings.arguments! as int;
+        return PokemonDetailPage(pokemonId: id);
+      },
+      settings: settings,
+    ),
     AppRoutes.regions => MaterialPageRoute<void>(
-        builder: (_) => const RegionsPage(),
-        settings: settings,
-      ),
+      builder: (_) => const RegionsPage(),
+      settings: settings,
+    ),
     AppRoutes.favorites => MaterialPageRoute<void>(
-        builder: (_) => const FavoritesPage(),
-        settings: settings,
-      ),
+      builder: (_) => const FavoritesPage(),
+      settings: settings,
+    ),
     AppRoutes.profile => MaterialPageRoute<void>(
-        builder: (_) => const ProfilePage(),
-        settings: settings,
-      ),
+      builder: (_) => const ProfilePage(),
+      settings: settings,
+    ),
     _ => MaterialPageRoute<void>(
-        builder: (_) => const Scaffold(
-          body: Center(child: Text('Page not found')),
-        ),
-      ),
+      builder: (_) =>
+          const Scaffold(body: Center(child: Text('Page not found'))),
+    ),
   };
 }

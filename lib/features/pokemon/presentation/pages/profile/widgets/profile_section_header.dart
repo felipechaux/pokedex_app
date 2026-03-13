@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProfileSectionHeader extends StatelessWidget {
-  const ProfileSectionHeader({
-    super.key,
-    required this.title,
-  });
+  const ProfileSectionHeader({super.key, required this.title});
 
   final String title;
 

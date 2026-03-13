@@ -23,8 +23,6 @@ abstract class Pokemon with _$Pokemon {
 /// A single base stat of a Pokemon.
 @freezed
 abstract class PokemonStat with _$PokemonStat {
-  const factory PokemonStat({
-    required String name,
-    required int baseStat,
-  }) = _PokemonStat;
+  const factory PokemonStat({required String name, required int baseStat}) =
+      _PokemonStat;
 }

@@ -18,7 +18,10 @@ class SearchBarHeader extends HookConsumerWidget {
     useListenable(searchController);
 
     // Synchronize controller text with provider state (e.g., when filters are cleared)
-    ref.listen(pokemonFilterProvider.select((s) => s.searchQuery), (previous, next) {
+    ref.listen(pokemonFilterProvider.select((s) => s.searchQuery), (
+      previous,
+      next,
+    ) {
       if (next != searchController.text) {
         searchController.text = next;
       }
@@ -47,10 +50,16 @@ class SearchBarHeader extends HookConsumerWidget {
                       maxLength: 50,
                       decoration: InputDecoration(
                         hintText: l10n.searchPlaceholder,
-                        prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                        prefixIcon: const Icon(
+                          Icons.search,
+                          color: Colors.grey,
+                        ),
                         suffixIcon: searchController.text.isNotEmpty
                             ? IconButton(
-                                icon: const Icon(Icons.clear, color: Colors.grey),
+                                icon: const Icon(
+                                  Icons.clear,
+                                  color: Colors.grey,
+                                ),
                                 onPressed: () {
                                   HapticFeedback.lightImpact();
                                   searchController.clear();

@@ -20,7 +20,7 @@ import 'package:pokedex_app/core/providers/storage_providers.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Initialize SharedPreferences
   final sharedPrefs = await SharedPreferences.getInstance();
 

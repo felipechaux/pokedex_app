@@ -36,9 +36,9 @@ PokemonLocalDataSource pokemonLocalDataSource(Ref ref) =>
 
 @riverpod
 PokemonRepository pokemonRepository(Ref ref) => PokemonRepositoryImpl(
-      ref.watch(pokemonRemoteDataSourceProvider),
-      ref.watch(pokemonLocalDataSourceProvider),
-    );
+  ref.watch(pokemonRemoteDataSourceProvider),
+  ref.watch(pokemonLocalDataSourceProvider),
+);
 
 // ---------------------------------------------------------------------------
 // Use case providers
@@ -73,14 +73,16 @@ class Favorites extends _$Favorites {
   @override
   FutureOr<List<PokemonListItemState>> build() async {
     final favorites = await ref.watch(getFavoritesProvider).call();
-    
+
     return favorites
-        .map((p) => PokemonListItemState(
-              id: p.id,
-              name: p.name,
-              imageUrl: p.imageUrl,
-              types: p.types,
-            ))
+        .map(
+          (p) => PokemonListItemState(
+            id: p.id,
+            name: p.name,
+            imageUrl: p.imageUrl,
+            types: p.types,
+          ),
+        )
         .toList();
   }
 
@@ -95,10 +97,14 @@ class Favorites extends _$Favorites {
     // Optimistic update: remove/add from local state immediately
     final currentState = state.asData?.value;
     if (currentState != null) {
-      final exists = currentState.any((PokemonListItemState p) => p.id == item.id);
+      final exists = currentState.any(
+        (PokemonListItemState p) => p.id == item.id,
+      );
       if (exists) {
         state = AsyncData(
-          currentState.where((PokemonListItemState p) => p.id != item.id).toList(),
+          currentState
+              .where((PokemonListItemState p) => p.id != item.id)
+              .toList(),
         );
       } else {
         state = AsyncData([...currentState, item]);
@@ -128,13 +134,12 @@ bool isPokemonFavorite(Ref ref, int id) {
 
 /// Provides detail for a single Pokemon.
 @riverpod
-Future<PokemonDetailState> pokemonDetail(
-  Ref ref, {
-  required int id,
-}) async {
+Future<PokemonDetailState> pokemonDetail(Ref ref, {required int id}) async {
   final useCase = ref.watch(getPokemonDetailProvider);
   final language = ref.watch(localeStateProvider).languageCode;
-  final pokemon = await useCase(GetPokemonDetailParams(id: id, language: language));
+  final pokemon = await useCase(
+    GetPokemonDetailParams(id: id, language: language),
+  );
   return PokemonDetailState(
     id: pokemon.id,
     name: pokemon.name,
@@ -168,12 +173,16 @@ class PokemonListNotifier extends _$PokemonListNotifier {
     }
 
     final hasInternet = await ref.read(networkInfoProvider).isConnected;
-    if (!ref.mounted) return const PokemonListPageState(items: [], offset: 0, isLoadingMore: false);
-    
-    if (!hasInternet) {
-      throw const Failure.network(
-        message: kNoInternetAccessError,
+    if (!ref.mounted) {
+      return const PokemonListPageState(
+        items: [],
+        offset: 0,
+        isLoadingMore: false,
       );
+    }
+
+    if (!hasInternet) {
+      throw const Failure.network(message: kNoInternetAccessError);
     }
 
     final items = await _fetchPage(0);
@@ -192,8 +201,9 @@ class PokemonListNotifier extends _$PokemonListNotifier {
       if (!ref.mounted) return;
 
       final currentIds = currentState.items.map((e) => e.id).toSet();
-      final filteredNewItems =
-          newItems.where((e) => !currentIds.contains(e.id)).toList();
+      final filteredNewItems = newItems
+          .where((e) => !currentIds.contains(e.id))
+          .toList();
 
       state = AsyncData(
         currentState.copyWith(
@@ -234,11 +244,14 @@ AsyncValue<List<PokemonListItemState>> filteredPokemonList(Ref ref) {
 
   return listState.whenData((state) {
     return state.items.where((pokemon) {
-      final matchesSearch =
-          pokemon.name.toLowerCase().contains(filter.searchQuery.toLowerCase());
-      final matchesType = filter.selectedTypes.isEmpty ||
+      final matchesSearch = pokemon.name.toLowerCase().contains(
+        filter.searchQuery.toLowerCase(),
+      );
+      final matchesType =
+          filter.selectedTypes.isEmpty ||
           pokemon.types.any(
-              (type) => filter.selectedTypes.contains(type.toLowerCase()));
+            (type) => filter.selectedTypes.contains(type.toLowerCase()),
+          );
       return matchesSearch && matchesType;
     }).toList();
   });
@@ -286,8 +299,6 @@ abstract class PokemonDetailState with _$PokemonDetailState {
 
 @freezed
 abstract class StatState with _$StatState {
-  const factory StatState({
-    required String name,
-    required int baseStat,
-  }) = _StatState;
+  const factory StatState({required String name, required int baseStat}) =
+      _StatState;
 }

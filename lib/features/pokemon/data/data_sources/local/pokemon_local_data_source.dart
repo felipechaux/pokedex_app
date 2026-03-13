@@ -30,25 +30,17 @@ class PokemonLocalDataSourceImpl implements PokemonLocalDataSource {
 
   @override
   Future<void> saveFavorite(PokemonListItem pokemon) async {
-    await _database.insert(
-      _tableName,
-      {
-        'id': pokemon.id,
-        'name': pokemon.name,
-        'imageUrl': pokemon.imageUrl,
-        'types': pokemon.types.join(','),
-      },
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
+    await _database.insert(_tableName, {
+      'id': pokemon.id,
+      'name': pokemon.name,
+      'imageUrl': pokemon.imageUrl,
+      'types': pokemon.types.join(','),
+    }, conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   @override
   Future<void> removeFavorite(int id) async {
-    await _database.delete(
-      _tableName,
-      where: 'id = ?',
-      whereArgs: [id],
-    );
+    await _database.delete(_tableName, where: 'id = ?', whereArgs: [id]);
   }
 
   @override

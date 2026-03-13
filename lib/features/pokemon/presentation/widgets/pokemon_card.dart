@@ -44,10 +44,9 @@ class PokemonCard extends HookConsumerWidget {
                   ? null
                   : () {
                       HapticFeedback.lightImpact();
-                      Navigator.of(context).pushNamed(
-                        AppRoutes.pokemonDetail,
-                        arguments: item.id,
-                      );
+                      Navigator.of(
+                        context,
+                      ).pushNamed(AppRoutes.pokemonDetail, arguments: item.id);
                     },
               behavior: HitTestBehavior.opaque,
               child: Padding(

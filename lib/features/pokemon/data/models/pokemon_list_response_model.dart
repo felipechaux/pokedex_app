@@ -20,10 +20,8 @@ abstract class PokemonListResponseModel with _$PokemonListResponseModel {
 /// A single entry in the Pokemon list — name + url only.
 @freezed
 abstract class PokemonResult with _$PokemonResult {
-  const factory PokemonResult({
-    required String name,
-    required String url,
-  }) = _PokemonResult;
+  const factory PokemonResult({required String name, required String url}) =
+      _PokemonResult;
 
   factory PokemonResult.fromJson(Map<String, dynamic> json) =>
       _$PokemonResultFromJson(json);

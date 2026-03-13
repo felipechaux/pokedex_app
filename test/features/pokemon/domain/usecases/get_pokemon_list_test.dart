@@ -26,13 +26,17 @@ void main() {
 
   test('should get pokemon list from the repository', () async {
     // Arrange
-    when(() => mockRepository.getPokemonList(
-          limit: any(named: 'limit'),
-          offset: any(named: 'offset'),
-        )).thenAnswer((_) async => tPokemonList);
+    when(
+      () => mockRepository.getPokemonList(
+        limit: any(named: 'limit'),
+        offset: any(named: 'offset'),
+      ),
+    ).thenAnswer((_) async => tPokemonList);
 
     // Act
-    final result = await useCase(const GetPokemonListParams(limit: 20, offset: 0));
+    final result = await useCase(
+      const GetPokemonListParams(limit: 20, offset: 0),
+    );
 
     // Assert
     expect(result, tPokemonList);

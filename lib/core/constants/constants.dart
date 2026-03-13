@@ -11,8 +11,10 @@ abstract final class ApiEndpoints {
 }
 
 /// Error Messages
-const String kNoInternetError = 'No internet connection. Please check your network.';
+const String kNoInternetError =
+    'No internet connection. Please check your network.';
 const String kNoInternetSimpleError = 'No internet connection';
-const String kNoInternetAccessError = 'No internet access. Please check your connection.';
+const String kNoInternetAccessError =
+    'No internet access. Please check your connection.';
 const String kUnexpectedError = 'Unexpected error';
 const String kNetworkErrorPrefix = 'Network error';

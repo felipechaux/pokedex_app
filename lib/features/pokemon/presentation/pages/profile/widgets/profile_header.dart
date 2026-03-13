@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProfileHeader extends StatelessWidget {
-  const ProfileHeader({
-    super.key,
-    required this.name,
-    required this.title,
-  });
+  const ProfileHeader({super.key, required this.name, required this.title});
 
   final String name;
   final String title;
@@ -34,28 +30,15 @@ class ProfileHeader extends StatelessWidget {
               ],
             ),
             child: const Center(
-              child: Icon(
-                Icons.person,
-                size: 60,
-                color: Colors.white,
-              ),
+              child: Icon(Icons.person, size: 60, color: Colors.white),
             ),
           ),
           const SizedBox(height: 16),
           Text(
             name,
-            style: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 16,
-              color: Colors.grey,
-            ),
-          ),
+          Text(title, style: const TextStyle(fontSize: 16, color: Colors.grey)),
         ],
       ),
     );

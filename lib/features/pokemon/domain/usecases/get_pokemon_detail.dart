@@ -15,10 +15,7 @@ interface class GetPokemonDetail
 
   @override
   Future<Pokemon> call(GetPokemonDetailParams params) =>
-      _repository.getPokemonDetail(
-        id: params.id,
-        language: params.language,
-      );
+      _repository.getPokemonDetail(id: params.id, language: params.language);
 }
 
 @freezed

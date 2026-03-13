@@ -29,10 +29,7 @@ class ProfilePage extends HookConsumerWidget {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            const ProfileHeader(
-              name: 'Ash Ketchum',
-              title: 'Pokemon Master',
-            ),
+            const ProfileHeader(name: 'Ash Ketchum', title: 'Pokemon Master'),
             const SizedBox(height: 40),
 
             // Settings Section
@@ -42,23 +39,19 @@ class ProfilePage extends HookConsumerWidget {
               icon: Icons.language,
               title: l10n.language,
               trailing: DropdownButton<String>(
-                value: ['en', 'es'].contains(currentLocale.languageCode) 
-                    ? currentLocale.languageCode 
+                value: ['en', 'es'].contains(currentLocale.languageCode)
+                    ? currentLocale.languageCode
                     : 'en',
                 underline: const SizedBox(),
                 items: [
-                  DropdownMenuItem(
-                    value: 'en',
-                    child: Text(l10n.english),
-                  ),
-                  DropdownMenuItem(
-                    value: 'es',
-                    child: Text(l10n.spanish),
-                  ),
+                  DropdownMenuItem(value: 'en', child: Text(l10n.english)),
+                  DropdownMenuItem(value: 'es', child: Text(l10n.spanish)),
                 ],
                 onChanged: (value) {
                   if (value != null) {
-                    ref.read(localeStateProvider.notifier).setLocale(Locale(value));
+                    ref
+                        .read(localeStateProvider.notifier)
+                        .setLocale(Locale(value));
                   }
                 },
               ),
@@ -67,7 +60,9 @@ class ProfilePage extends HookConsumerWidget {
               icon: Icons.palette,
               title: l10n.appearance,
               trailing: DropdownButton<ThemeMode>(
-                value: themeMode == ThemeMode.system ? ThemeMode.light : themeMode,
+                value: themeMode == ThemeMode.system
+                    ? ThemeMode.light
+                    : themeMode,
                 underline: const SizedBox(),
                 items: [
                   DropdownMenuItem(

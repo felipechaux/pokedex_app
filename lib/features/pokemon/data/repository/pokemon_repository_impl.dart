@@ -49,7 +49,8 @@ final class PokemonRepositoryImpl implements PokemonRepository {
     } on DioException catch (e) {
       throw _handleDioError(e);
     } catch (e) {
-      if (e.toString().contains('SocketException') || e.toString().contains('Failed host lookup')) {
+      if (e.toString().contains('SocketException') ||
+          e.toString().contains('Failed host lookup')) {
         throw const Failure.network(message: kNoInternetError);
       }
       throw Failure.unknown(message: '$kUnexpectedError: $e');
@@ -60,7 +61,7 @@ final class PokemonRepositoryImpl implements PokemonRepository {
   Future<List<PokemonListItem>> getFavorites() async {
     return _localDataSource.getFavorites();
   }
-  
+
   @override
   Future<void> toggleFavorite({required PokemonListItem item}) async {
     final isFav = await _localDataSource.isFavorite(item.id);
@@ -88,7 +89,8 @@ final class PokemonRepositoryImpl implements PokemonRepository {
     } on DioException catch (e) {
       throw _handleDioError(e);
     } catch (e) {
-      if (e.toString().contains('SocketException') || e.toString().contains('Failed host lookup')) {
+      if (e.toString().contains('SocketException') ||
+          e.toString().contains('Failed host lookup')) {
         throw const Failure.network(message: kNoInternetError);
       }
       throw Failure.unknown(message: '$kUnexpectedError: $e');
@@ -105,7 +107,8 @@ final class PokemonRepositoryImpl implements PokemonRepository {
     String language,
   ) {
     // Find flavor text in requested language or English fallback
-    final flavorText = species.flavorTextEntries
+    final flavorText =
+        species.flavorTextEntries
             .where((e) => e.language.name == language)
             .firstOrNull
             ?.flavorText
@@ -119,7 +122,8 @@ final class PokemonRepositoryImpl implements PokemonRepository {
             .replaceAll('\f', ' ') ??
         '';
 
-    final category = species.genera
+    final category =
+        species.genera
             .where((e) => e.language.name == language)
             .firstOrNull
             ?.genus ??
@@ -132,19 +136,15 @@ final class PokemonRepositoryImpl implements PokemonRepository {
     return Pokemon(
       id: model.id,
       name: model.name,
-      imageUrl: model.sprites.other?.officialArtwork?.frontDefault ??
+      imageUrl:
+          model.sprites.other?.officialArtwork?.frontDefault ??
           model.sprites.frontDefault ??
           '',
       types: model.types.map((t) => t.type.name).toList(),
       height: model.height,
       weight: model.weight,
       stats: model.stats
-          .map(
-            (s) => PokemonStat(
-              name: s.stat.name,
-              baseStat: s.baseStat,
-            ),
-          )
+          .map((s) => PokemonStat(name: s.stat.name, baseStat: s.baseStat))
           .toList(),
       abilities: model.abilities
           .where((a) => !a.isHidden)
@@ -157,7 +157,8 @@ final class PokemonRepositoryImpl implements PokemonRepository {
   }
 
   Failure _handleDioError(DioException e) {
-    final message = (e.type == DioExceptionType.connectionError ||
+    final message =
+        (e.type == DioExceptionType.connectionError ||
             e.type == DioExceptionType.connectionTimeout ||
             e.message?.contains('SocketException') == true ||
             e.message?.contains('Failed host lookup') == true)

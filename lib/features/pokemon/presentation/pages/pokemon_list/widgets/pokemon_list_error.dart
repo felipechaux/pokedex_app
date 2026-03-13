@@ -22,12 +22,7 @@ class PokemonListError extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset(
-              asset,
-              width: 240,
-              height: 240,
-              fit: BoxFit.contain,
-            ),
+            Image.asset(asset, width: 240, height: 240, fit: BoxFit.contain),
             const SizedBox(height: 32),
             Text(
               l10n.errorTitle,

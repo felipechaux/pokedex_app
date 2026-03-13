@@ -39,9 +39,7 @@ class ConnectivityInterceptor extends Interceptor {
       return handler.reject(
         DioException(
           requestOptions: err.requestOptions,
-          error: const Failure.network(
-            message: kNoInternetError,
-          ),
+          error: const Failure.network(message: kNoInternetError),
           type: DioExceptionType.connectionError,
         ),
       );

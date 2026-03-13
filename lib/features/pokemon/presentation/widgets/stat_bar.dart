@@ -25,9 +25,9 @@ class StatBar extends StatelessWidget {
             child: Text(
               _formatStatName(stat.name),
               style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: Colors.black54,
-                    fontWeight: FontWeight.bold,
-                  ),
+                color: Colors.black54,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           SizedBox(
@@ -35,10 +35,10 @@ class StatBar extends StatelessWidget {
             child: Text(
               stat.baseStat.toString().padLeft(3, '0'),
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 1.0,
-                  ),
+                color: Colors.black87,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 1.0,
+              ),
               textAlign: TextAlign.end,
             ),
           ),
@@ -65,22 +65,22 @@ class StatBar extends StatelessWidget {
   }
 
   Color _colorForStat(String name) => switch (name) {
-        'hp' => const Color(0xFFFF5959),
-        'attack' => const Color(0xFFF5AC78),
-        'defense' => const Color(0xFFFAE078),
-        'special-attack' => const Color(0xFF9DB7F5),
-        'special-defense' => const Color(0xFFA7DB8D),
-        'speed' => const Color(0xFFFA92B2),
-        _ => Colors.grey,
-      };
+    'hp' => const Color(0xFFFF5959),
+    'attack' => const Color(0xFFF5AC78),
+    'defense' => const Color(0xFFFAE078),
+    'special-attack' => const Color(0xFF9DB7F5),
+    'special-defense' => const Color(0xFFA7DB8D),
+    'speed' => const Color(0xFFFA92B2),
+    _ => Colors.grey,
+  };
 
   String _formatStatName(String name) => switch (name) {
-        'hp' => 'HP',
-        'attack' => 'ATK',
-        'defense' => 'DEF',
-        'special-attack' => 'Sp. ATK',
-        'special-defense' => 'Sp. DEF',
-        'speed' => 'SPD',
-        _ => name,
-      };
+    'hp' => 'HP',
+    'attack' => 'ATK',
+    'defense' => 'DEF',
+    'special-attack' => 'Sp. ATK',
+    'special-defense' => 'Sp. DEF',
+    'speed' => 'SPD',
+    _ => name,
+  };
 }

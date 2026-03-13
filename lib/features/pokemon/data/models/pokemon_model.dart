@@ -76,10 +76,8 @@ abstract class PokemonAbilitySlot with _$PokemonAbilitySlot {
 
 @freezed
 abstract class PokemonAbilityRef with _$PokemonAbilityRef {
-  const factory PokemonAbilityRef({
-    required String name,
-    required String url,
-  }) = _PokemonAbilityRef;
+  const factory PokemonAbilityRef({required String name, required String url}) =
+      _PokemonAbilityRef;
 
   factory PokemonAbilityRef.fromJson(Map<String, dynamic> json) =>
       _$PokemonAbilityRefFromJson(json);
@@ -99,8 +97,7 @@ abstract class PokemonSprites with _$PokemonSprites {
 @freezed
 abstract class PokemonOtherSprites with _$PokemonOtherSprites {
   const factory PokemonOtherSprites({
-    @JsonKey(name: 'official-artwork')
-    PokemonOfficialArtwork? officialArtwork,
+    @JsonKey(name: 'official-artwork') PokemonOfficialArtwork? officialArtwork,
   }) = _PokemonOtherSprites;
 
   factory PokemonOtherSprites.fromJson(Map<String, dynamic> json) =>
