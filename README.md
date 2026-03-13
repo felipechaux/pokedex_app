@@ -8,6 +8,26 @@ Una aplicación de Pokédex moderna y profesional construida con **Flutter**, si
 
 ---
 
+## 📱 Vista Previa (Prototype Showcase)
+
+> [!TIP]
+> **¿Cómo añadir tu video aquí?** Graba un clip de 15s de la app, abre este `README.md` en el editor de GitHub y simplemente **arrastra y suelta el archivo de video** debajo de esta línea. GitHub lo procesará y mostrará automáticamente.
+
+<!-- REEMPLAZAR ESTA LÍNEA CON TU VIDEO ARRASTRADO -->
+![Video Prototype Placeholder](https://via.placeholder.com/800x450.png?text=Arrastra+aquí+tu+Video+de+Demostración)
+
+---
+
+## 🎨 Look & Feel "Premium"
+
+La aplicación ha sido refinada para ofrecer una experiencia visual de alta calidad:
+*   **Animaciones de Celebración**: Efectos de pulso y chispas (sparkles) al marcar un Pokémon como favorito.
+*   **Transiciones Hero Avanzadas**: El fondo de la tarjeta en el listado se expande suavemente para convertirse en el encabezado de la página de detalle.
+*   **Feedback Háptico**: Integración de `HapticFeedback.lightImpact()` en navegación, filtros y botones para una sensación más táctil ("Tactile UX").
+*   **Diseño Moderno**: Uso de tipografía Poppins, espaciado generoso y bordes redondeados siguiendo principios de Material Design 3.
+
+---
+
 ## 🏗️ Implementación de Arquitectura
 
 Este proyecto utiliza **Clean Architecture + Riverpod + Inyección de Dependencias**.
@@ -84,10 +104,11 @@ Se han implementado diversas capas para asegurar la estabilidad y protección de
 
 1.  **Listado Infinito**: Carga paginada de Pokémon con skeleton loaders fluidos.
 2.  **Detalle Extendido**: Información completa incluyendo tipos, estadísticas base, habilidades y descripciones localizadas.
-3.  **Sistema de Favoritos**: Persistencia local que permite guardar tus Pokémon preferidos.
+3.  **Sistema de Favoritos**: Persistencia local con efectos visuales animados (pulsing hearts & sparkles).
 4.  **I18N (Multi-idioma)**: Soporte completo para **Inglés** y **Español**, incluyendo datos dinámicos desde la API.
-5.  **Temas Dinámicos**: Modo Claro y Modo Oscuro (Blue Dark) persistentes.
-6.  **Offline Ready**: Notificación instantánea y estado de error personalizado (Magikarp state) cuando no hay internet.
+5.  **Temas Dinámicos**: Modo Claro y Modo Oscuro persistentes.
+6.  **Offline Ready**: Notificación instantánea y estado de error personalizado (Magikarp state).
+7.  **UX Táctil**: Experiencia enriquecida con vibraciones sutiles (Haptics) y micro-animaciones premium.
 
 ---
 
