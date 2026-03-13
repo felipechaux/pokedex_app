@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 
 import '../../models/pokemon_list_response_model.dart';
 import '../../models/pokemon_model.dart';
+import '../../models/pokemon_species_model.dart';
 
 part 'pokemon_remote_data_source.g.dart';
 
@@ -20,4 +21,7 @@ abstract class PokemonRemoteDataSource {
 
   @GET('/pokemon/{id}')
   Future<PokemonModel> getPokemonDetail(@Path('id') int id);
+
+  @GET('/pokemon-species/{id}')
+  Future<PokemonSpeciesModel> getPokemonSpecies(@Path('id') int id);
 }

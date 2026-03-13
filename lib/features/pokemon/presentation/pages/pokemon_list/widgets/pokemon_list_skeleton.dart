@@ -44,7 +44,9 @@ class PokemonListSkeleton extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
-                    Row(
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
                       children: [
                         Container(
                           width: 60,
@@ -54,7 +56,6 @@ class PokemonListSkeleton extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
-                        const SizedBox(width: 8),
                         Container(
                           width: 60,
                           height: 24,

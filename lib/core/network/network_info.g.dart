@@ -101,4 +101,4 @@ final class NetworkInfoProvider
   }
 }
 
-String _$networkInfoHash() => r'b1f96090adb1f808571029799eeadbf4e0629b22';
+String _$networkInfoHash() => r'c7c079b804b3d3a9c3e5fa30573f9d59a4ebbcb7';

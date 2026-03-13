@@ -12,7 +12,7 @@ class TypeBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = type.typeColor;
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 5),
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(20),
@@ -23,28 +23,41 @@ class TypeBadge extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(2),
             decoration: const BoxDecoration(
-              color: Colors.white24,
+              color: Colors.white,
               shape: BoxShape.circle,
             ),
-            child: const Icon(
-              Icons.circle,
-              size: 12,
-              color: Colors.white,
+            child: Icon(
+              _iconForType(type),
+              size: 13,
+              color: color,
             ),
           ),
-          const SizedBox(width: 6),
+          const SizedBox(width: 7),
           Text(
             _capitalize(type),
             style: Theme.of(context).textTheme.labelMedium?.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 12,
+                  fontSize: 13,
                 ),
           ),
         ],
       ),
     );
   }
+
+  IconData _iconForType(String type) => switch (type) {
+        'grass' => Icons.eco,
+        'fire' => Icons.local_fire_department,
+        'water' => Icons.water_drop,
+        'electric' => Icons.bolt,
+        'poison' => Icons.vaping_rooms, // Approximate
+        'flying' => Icons.air,
+        'psychic' => Icons.auto_awesome,
+        'ice' => Icons.ac_unit,
+        'bug' => Icons.pest_control,
+        _ => Icons.circle,
+      };
 
   String _capitalize(String s) =>
       s.isEmpty ? s : s[0].toUpperCase() + s.substring(1);

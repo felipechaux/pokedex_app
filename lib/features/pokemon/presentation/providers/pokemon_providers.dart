@@ -62,6 +62,9 @@ Future<PokemonDetailState> pokemonDetail(
         .map((s) => StatState(name: s.name, baseStat: s.baseStat))
         .toList(),
     abilities: pokemon.abilities,
+    flavorText: pokemon.flavorText,
+    category: pokemon.category,
+    genderRate: pokemon.genderRate,
   );
 }
 
@@ -181,6 +184,9 @@ class PokemonDetailState {
     required this.weight,
     required this.stats,
     required this.abilities,
+    required this.flavorText,
+    required this.category,
+    required this.genderRate,
   });
 
   final int id;
@@ -191,6 +197,9 @@ class PokemonDetailState {
   final int weight;
   final List<StatState> stats;
   final List<String> abilities;
+  final String flavorText;
+  final String category;
+  final int genderRate;
 }
 
 class StatState {

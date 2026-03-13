@@ -49,8 +49,9 @@ class PokemonListPage extends HookConsumerWidget {
       body: SafeArea(
         child: isOffline
             ? PokemonListError(
-                error:
-                    const Failure.network(message: 'Sin conexión a internet'),
+                error: const Failure.network(
+                  message: 'Sin conexión a internet',
+                ),
                 onRetry: () => ref.invalidate(connectivityProvider),
               )
             : listState.when(

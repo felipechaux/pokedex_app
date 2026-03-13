@@ -19,10 +19,9 @@ class PokemonCard extends StatelessWidget {
     final baseColor = primaryType.typeColor;
 
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(
-        AppRoutes.pokemonDetail,
-        arguments: item.id,
-      ),
+      onTap: () => Navigator.of(
+        context,
+      ).pushNamed(AppRoutes.pokemonDetail, arguments: item.id),
       child: Container(
         margin: const EdgeInsets.only(bottom: 16),
         height: 130,
@@ -34,7 +33,7 @@ class PokemonCard extends StatelessWidget {
           children: [
             // Left Content: Info
             Expanded(
-              flex: 3,
+              flex: 4,
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -61,10 +60,12 @@ class PokemonCard extends StatelessWidget {
                     Row(
                       children: item.types
                           .take(2)
-                          .map((type) => Padding(
-                                padding: const EdgeInsets.only(right: 8),
-                                child: TypeBadge(type: type),
-                              ))
+                          .map(
+                            (type) => Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: TypeBadge(type: type),
+                            ),
+                          )
                           .toList(),
                     ),
                   ],

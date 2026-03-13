@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Pokemon {
 
- int get id; String get name; String get imageUrl; List<String> get types; int get height; int get weight; List<PokemonStat> get stats; List<String> get abilities;
+ int get id; String get name; String get imageUrl; List<String> get types; int get height; int get weight; List<PokemonStat> get stats; List<String> get abilities; String get flavorText; String get category; int get genderRate;
 /// Create a copy of Pokemon
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $PokemonCopyWith<Pokemon> get copyWith => _$PokemonCopyWithImpl<Pokemon>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Pokemon&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&const DeepCollectionEquality().equals(other.types, types)&&(identical(other.height, height) || other.height == height)&&(identical(other.weight, weight) || other.weight == weight)&&const DeepCollectionEquality().equals(other.stats, stats)&&const DeepCollectionEquality().equals(other.abilities, abilities));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Pokemon&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&const DeepCollectionEquality().equals(other.types, types)&&(identical(other.height, height) || other.height == height)&&(identical(other.weight, weight) || other.weight == weight)&&const DeepCollectionEquality().equals(other.stats, stats)&&const DeepCollectionEquality().equals(other.abilities, abilities)&&(identical(other.flavorText, flavorText) || other.flavorText == flavorText)&&(identical(other.category, category) || other.category == category)&&(identical(other.genderRate, genderRate) || other.genderRate == genderRate));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,name,imageUrl,const DeepCollectionEquality().hash(types),height,weight,const DeepCollectionEquality().hash(stats),const DeepCollectionEquality().hash(abilities));
+int get hashCode => Object.hash(runtimeType,id,name,imageUrl,const DeepCollectionEquality().hash(types),height,weight,const DeepCollectionEquality().hash(stats),const DeepCollectionEquality().hash(abilities),flavorText,category,genderRate);
 
 @override
 String toString() {
-  return 'Pokemon(id: $id, name: $name, imageUrl: $imageUrl, types: $types, height: $height, weight: $weight, stats: $stats, abilities: $abilities)';
+  return 'Pokemon(id: $id, name: $name, imageUrl: $imageUrl, types: $types, height: $height, weight: $weight, stats: $stats, abilities: $abilities, flavorText: $flavorText, category: $category, genderRate: $genderRate)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $PokemonCopyWith<$Res>  {
   factory $PokemonCopyWith(Pokemon value, $Res Function(Pokemon) _then) = _$PokemonCopyWithImpl;
 @useResult
 $Res call({
- int id, String name, String imageUrl, List<String> types, int height, int weight, List<PokemonStat> stats, List<String> abilities
+ int id, String name, String imageUrl, List<String> types, int height, int weight, List<PokemonStat> stats, List<String> abilities, String flavorText, String category, int genderRate
 });
 
 
@@ -62,7 +62,7 @@ class _$PokemonCopyWithImpl<$Res>
 
 /// Create a copy of Pokemon
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? imageUrl = null,Object? types = null,Object? height = null,Object? weight = null,Object? stats = null,Object? abilities = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? imageUrl = null,Object? types = null,Object? height = null,Object? weight = null,Object? stats = null,Object? abilities = null,Object? flavorText = null,Object? category = null,Object? genderRate = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -72,7 +72,10 @@ as List<String>,height: null == height ? _self.height : height // ignore: cast_n
 as int,weight: null == weight ? _self.weight : weight // ignore: cast_nullable_to_non_nullable
 as int,stats: null == stats ? _self.stats : stats // ignore: cast_nullable_to_non_nullable
 as List<PokemonStat>,abilities: null == abilities ? _self.abilities : abilities // ignore: cast_nullable_to_non_nullable
-as List<String>,
+as List<String>,flavorText: null == flavorText ? _self.flavorText : flavorText // ignore: cast_nullable_to_non_nullable
+as String,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
+as String,genderRate: null == genderRate ? _self.genderRate : genderRate // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 
@@ -157,10 +160,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name,  String imageUrl,  List<String> types,  int height,  int weight,  List<PokemonStat> stats,  List<String> abilities)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name,  String imageUrl,  List<String> types,  int height,  int weight,  List<PokemonStat> stats,  List<String> abilities,  String flavorText,  String category,  int genderRate)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Pokemon() when $default != null:
-return $default(_that.id,_that.name,_that.imageUrl,_that.types,_that.height,_that.weight,_that.stats,_that.abilities);case _:
+return $default(_that.id,_that.name,_that.imageUrl,_that.types,_that.height,_that.weight,_that.stats,_that.abilities,_that.flavorText,_that.category,_that.genderRate);case _:
   return orElse();
 
 }
@@ -178,10 +181,10 @@ return $default(_that.id,_that.name,_that.imageUrl,_that.types,_that.height,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name,  String imageUrl,  List<String> types,  int height,  int weight,  List<PokemonStat> stats,  List<String> abilities)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name,  String imageUrl,  List<String> types,  int height,  int weight,  List<PokemonStat> stats,  List<String> abilities,  String flavorText,  String category,  int genderRate)  $default,) {final _that = this;
 switch (_that) {
 case _Pokemon():
-return $default(_that.id,_that.name,_that.imageUrl,_that.types,_that.height,_that.weight,_that.stats,_that.abilities);case _:
+return $default(_that.id,_that.name,_that.imageUrl,_that.types,_that.height,_that.weight,_that.stats,_that.abilities,_that.flavorText,_that.category,_that.genderRate);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -198,10 +201,10 @@ return $default(_that.id,_that.name,_that.imageUrl,_that.types,_that.height,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name,  String imageUrl,  List<String> types,  int height,  int weight,  List<PokemonStat> stats,  List<String> abilities)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name,  String imageUrl,  List<String> types,  int height,  int weight,  List<PokemonStat> stats,  List<String> abilities,  String flavorText,  String category,  int genderRate)?  $default,) {final _that = this;
 switch (_that) {
 case _Pokemon() when $default != null:
-return $default(_that.id,_that.name,_that.imageUrl,_that.types,_that.height,_that.weight,_that.stats,_that.abilities);case _:
+return $default(_that.id,_that.name,_that.imageUrl,_that.types,_that.height,_that.weight,_that.stats,_that.abilities,_that.flavorText,_that.category,_that.genderRate);case _:
   return null;
 
 }
@@ -213,7 +216,7 @@ return $default(_that.id,_that.name,_that.imageUrl,_that.types,_that.height,_tha
 
 
 class _Pokemon implements Pokemon {
-  const _Pokemon({required this.id, required this.name, required this.imageUrl, required final  List<String> types, required this.height, required this.weight, required final  List<PokemonStat> stats, required final  List<String> abilities}): _types = types,_stats = stats,_abilities = abilities;
+  const _Pokemon({required this.id, required this.name, required this.imageUrl, required final  List<String> types, required this.height, required this.weight, required final  List<PokemonStat> stats, required final  List<String> abilities, required this.flavorText, required this.category, required this.genderRate}): _types = types,_stats = stats,_abilities = abilities;
   
 
 @override final  int id;
@@ -242,6 +245,9 @@ class _Pokemon implements Pokemon {
   return EqualUnmodifiableListView(_abilities);
 }
 
+@override final  String flavorText;
+@override final  String category;
+@override final  int genderRate;
 
 /// Create a copy of Pokemon
 /// with the given fields replaced by the non-null parameter values.
@@ -253,16 +259,16 @@ _$PokemonCopyWith<_Pokemon> get copyWith => __$PokemonCopyWithImpl<_Pokemon>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Pokemon&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&const DeepCollectionEquality().equals(other._types, _types)&&(identical(other.height, height) || other.height == height)&&(identical(other.weight, weight) || other.weight == weight)&&const DeepCollectionEquality().equals(other._stats, _stats)&&const DeepCollectionEquality().equals(other._abilities, _abilities));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Pokemon&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&const DeepCollectionEquality().equals(other._types, _types)&&(identical(other.height, height) || other.height == height)&&(identical(other.weight, weight) || other.weight == weight)&&const DeepCollectionEquality().equals(other._stats, _stats)&&const DeepCollectionEquality().equals(other._abilities, _abilities)&&(identical(other.flavorText, flavorText) || other.flavorText == flavorText)&&(identical(other.category, category) || other.category == category)&&(identical(other.genderRate, genderRate) || other.genderRate == genderRate));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,name,imageUrl,const DeepCollectionEquality().hash(_types),height,weight,const DeepCollectionEquality().hash(_stats),const DeepCollectionEquality().hash(_abilities));
+int get hashCode => Object.hash(runtimeType,id,name,imageUrl,const DeepCollectionEquality().hash(_types),height,weight,const DeepCollectionEquality().hash(_stats),const DeepCollectionEquality().hash(_abilities),flavorText,category,genderRate);
 
 @override
 String toString() {
-  return 'Pokemon(id: $id, name: $name, imageUrl: $imageUrl, types: $types, height: $height, weight: $weight, stats: $stats, abilities: $abilities)';
+  return 'Pokemon(id: $id, name: $name, imageUrl: $imageUrl, types: $types, height: $height, weight: $weight, stats: $stats, abilities: $abilities, flavorText: $flavorText, category: $category, genderRate: $genderRate)';
 }
 
 
@@ -273,7 +279,7 @@ abstract mixin class _$PokemonCopyWith<$Res> implements $PokemonCopyWith<$Res> {
   factory _$PokemonCopyWith(_Pokemon value, $Res Function(_Pokemon) _then) = __$PokemonCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String name, String imageUrl, List<String> types, int height, int weight, List<PokemonStat> stats, List<String> abilities
+ int id, String name, String imageUrl, List<String> types, int height, int weight, List<PokemonStat> stats, List<String> abilities, String flavorText, String category, int genderRate
 });
 
 
@@ -290,7 +296,7 @@ class __$PokemonCopyWithImpl<$Res>
 
 /// Create a copy of Pokemon
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? imageUrl = null,Object? types = null,Object? height = null,Object? weight = null,Object? stats = null,Object? abilities = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? imageUrl = null,Object? types = null,Object? height = null,Object? weight = null,Object? stats = null,Object? abilities = null,Object? flavorText = null,Object? category = null,Object? genderRate = null,}) {
   return _then(_Pokemon(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -300,7 +306,10 @@ as List<String>,height: null == height ? _self.height : height // ignore: cast_n
 as int,weight: null == weight ? _self.weight : weight // ignore: cast_nullable_to_non_nullable
 as int,stats: null == stats ? _self._stats : stats // ignore: cast_nullable_to_non_nullable
 as List<PokemonStat>,abilities: null == abilities ? _self._abilities : abilities // ignore: cast_nullable_to_non_nullable
-as List<String>,
+as List<String>,flavorText: null == flavorText ? _self.flavorText : flavorText // ignore: cast_nullable_to_non_nullable
+as String,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
+as String,genderRate: null == genderRate ? _self.genderRate : genderRate // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 

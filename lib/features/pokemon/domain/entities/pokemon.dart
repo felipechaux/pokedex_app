@@ -14,6 +14,9 @@ abstract class Pokemon with _$Pokemon {
     required int weight,
     required List<PokemonStat> stats,
     required List<String> abilities,
+    required String flavorText,
+    required String category,
+    required int genderRate,
   }) = _Pokemon;
 }
 

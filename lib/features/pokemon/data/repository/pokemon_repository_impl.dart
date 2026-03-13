@@ -6,6 +6,7 @@ import 'package:pokedex_app/features/pokemon/domain/entities/pokemon_list_item.d
 import 'package:pokedex_app/features/pokemon/domain/repository/pokemon_repository.dart';
 import 'package:pokedex_app/features/pokemon/data/data_sources/remote/pokemon_remote_data_source.dart';
 import 'package:pokedex_app/features/pokemon/data/models/pokemon_model.dart';
+import 'package:pokedex_app/features/pokemon/data/models/pokemon_species_model.dart';
 
 /// Concrete implementation of [PokemonRepository].
 ///
@@ -55,7 +56,8 @@ final class PokemonRepositoryImpl implements PokemonRepository {
   Future<Pokemon> getPokemonDetail({required int id}) async {
     try {
       final model = await _remoteDataSource.getPokemonDetail(id);
-      return _toDomainEntity(model);
+      final species = await _remoteDataSource.getPokemonSpecies(id);
+      return _toDomainEntity(model, species);
     } on DioException catch (e) {
       throw _handleDioError(e);
     } catch (e) {
@@ -70,28 +72,58 @@ final class PokemonRepositoryImpl implements PokemonRepository {
   // Mappers
   // ---------------------------------------------------------------------------
 
-  Pokemon _toDomainEntity(PokemonModel model) => Pokemon(
-        id: model.id,
-        name: model.name,
-        imageUrl: model.sprites.other?.officialArtwork?.frontDefault ??
-            model.sprites.frontDefault ??
-            '',
-        types: model.types.map((t) => t.type.name).toList(),
-        height: model.height,
-        weight: model.weight,
-        stats: model.stats
-            .map(
-              (s) => PokemonStat(
-                name: s.stat.name,
-                baseStat: s.baseStat,
-              ),
-            )
-            .toList(),
-        abilities: model.abilities
-            .where((a) => !a.isHidden)
-            .map((a) => a.ability.name)
-            .toList(),
-      );
+  Pokemon _toDomainEntity(PokemonModel model, PokemonSpeciesModel species) {
+    // Find flavor text in Spanish or English fallback
+    final flavorText = species.flavorTextEntries
+            .where((e) => e.language.name == 'es')
+            .firstOrNull
+            ?.flavorText
+            .replaceAll('\n', ' ')
+            .replaceAll('\f', ' ') ??
+        species.flavorTextEntries
+            .where((e) => e.language.name == 'en')
+            .firstOrNull
+            ?.flavorText
+            .replaceAll('\n', ' ')
+            .replaceAll('\f', ' ') ??
+        '';
+
+    final category = species.genera
+            .where((e) => e.language.name == 'es')
+            .firstOrNull
+            ?.genus ??
+        species.genera
+            .where((e) => e.language.name == 'en')
+            .firstOrNull
+            ?.genus ??
+        '';
+
+    return Pokemon(
+      id: model.id,
+      name: model.name,
+      imageUrl: model.sprites.other?.officialArtwork?.frontDefault ??
+          model.sprites.frontDefault ??
+          '',
+      types: model.types.map((t) => t.type.name).toList(),
+      height: model.height,
+      weight: model.weight,
+      stats: model.stats
+          .map(
+            (s) => PokemonStat(
+              name: s.stat.name,
+              baseStat: s.baseStat,
+            ),
+          )
+          .toList(),
+      abilities: model.abilities
+          .where((a) => !a.isHidden)
+          .map((a) => a.ability.name)
+          .toList(),
+      flavorText: flavorText.trim(),
+      category: category.trim(),
+      genderRate: species.genderRate,
+    );
+  }
 
   Failure _handleDioError(DioException e) {
     final message = (e.type == DioExceptionType.connectionError ||
