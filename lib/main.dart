@@ -5,6 +5,7 @@ import 'config/router/app_router.dart';
 import 'config/theme/app_theme.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     // ProviderScope is required for Riverpod to function.
     const ProviderScope(

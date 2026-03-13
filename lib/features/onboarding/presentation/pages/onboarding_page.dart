@@ -122,7 +122,9 @@ class OnboardingPage extends HookConsumerWidget {
                     }
                   },
                   style: FilledButton.styleFrom(
-                    backgroundColor: const Color(0xFF1E88E5),
+                    backgroundColor: Colors.white,
+                    foregroundColor: const Color(0xFF1E88E5),
+                    side: const BorderSide(color: Color(0xFF1E88E5), width: 2),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                     ),

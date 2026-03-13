@@ -43,8 +43,14 @@ dev_dependencies:
   retrofit_generator: ^10.2.1
   custom_lint: ^0.8.1
   riverpod_lint: ^3.1.0
+  flutter_native_splash: ^2.4.7
 
 flutter:
   uses-material-design: true
   assets:
     - assets/images/
+
+flutter_native_splash:
+  color: "#ffffff"
+  fullscreen: true
+
