@@ -114,4 +114,4 @@ Para correr el proyecto localmente, sigue estos pasos:
     ```
 
 ---
-**Desarrollado con ❤️ siguiendo las mejores prácticas de ingeniería de software.**
+**Desarrollado en Flutter con ❤️ siguiendo las mejores prácticas de ingeniería de software.**
