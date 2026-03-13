@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'config/router/app_router.dart';
@@ -20,6 +21,10 @@ import 'package:pokedex_app/core/providers/storage_providers.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 
   // Initialize SharedPreferences
   final sharedPrefs = await SharedPreferences.getInstance();
