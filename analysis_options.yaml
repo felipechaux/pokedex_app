@@ -1,0 +1,40 @@
+# This file configures the analyzer, which statically analyzes Dart code to
+# check for errors, warnings, and lints.
+#
+# The issues identified by the analyzer are surfaced in the UI of Dart-enabled
+# IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
+# invoked from the command line by running `flutter analyze`.
+
+# The following line activates a set of recommended lints for Flutter apps,
+# packages, and plugins designed to encourage good coding practices.
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  language:
+    # Enable strict type checks for safer, more expressive Dart 3 code.
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+  errors:
+    # Treat unused imports as errors to keep code clean.
+    unused_import: error
+    unused_local_variable: warning
+
+linter:
+  rules:
+    # Dart 3 Modern Features (dart-modern-features skill)
+    # Encourages use of records, patterns, switch expressions, etc.
+    prefer_single_quotes: true
+    always_declare_return_types: true
+    avoid_print: true
+    cancel_subscriptions: true
+    close_sinks: true
+    prefer_const_constructors: true
+    prefer_const_declarations: true
+    prefer_final_fields: true
+    prefer_final_locals: true
+    unnecessary_lambdas: true
+    use_rethrow_when_possible: true
+    eol_at_end_of_file: true
+    # Dart doc (dart-doc-validation skill)
+    comment_references: true

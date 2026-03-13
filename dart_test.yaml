@@ -1,0 +1,15 @@
+# dart_test.yaml — Test runner configuration for the Pokedex App
+# See: https://pub.dev/packages/test#configuration
+
+# Run tests on the VM by default (Flutter uses its own runner for widget tests)
+platforms:
+  - vm
+
+# Define tag categories for selective test execution:
+#   flutter test --tags unit
+#   flutter test --tags integration
+tags:
+  unit: {}
+  integration:
+    timeout: 2x
+  widget: {}
