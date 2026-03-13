@@ -104,7 +104,7 @@ class PokemonCard extends StatelessWidget {
                         child: CachedNetworkImage(
                           imageUrl: item.imageUrl,
                           fit: BoxFit.contain,
-                          placeholder: (_, __) => const Center(
+                          placeholder: (_, _) => const Center(
                             child: CircularProgressIndicator(
                               color: Colors.white,
                               strokeWidth: 2,

@@ -6,7 +6,7 @@ import 'package:pokedex_app/features/pokemon/domain/repository/pokemon_repositor
 
 part 'get_pokemon_detail.freezed.dart';
 
-/// Retrieves the full detail of a single Pokemon by its [id].
+/// Retrieves the full detail of a single Pokemon by its ID.
 final class GetPokemonDetail
     implements UseCase<Pokemon, GetPokemonDetailParams> {
   const GetPokemonDetail(this._repository);

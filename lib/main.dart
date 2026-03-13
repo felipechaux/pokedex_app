@@ -24,7 +24,7 @@ class PokedexApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
       onGenerateRoute: generateRoute,
-      initialRoute: AppRoutes.pokemonList,
+      initialRoute: AppRoutes.splash,
     );
   }
 }

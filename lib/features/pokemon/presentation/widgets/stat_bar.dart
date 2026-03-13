@@ -48,7 +48,7 @@ class StatBar extends StatelessWidget {
               tween: Tween(begin: 0, end: pct),
               duration: const Duration(milliseconds: 800),
               curve: Curves.easeOutCubic,
-              builder: (_, value, __) => ClipRRect(
+              builder: (_, value, _) => ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: LinearProgressIndicator(
                   value: value,
