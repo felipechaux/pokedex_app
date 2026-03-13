@@ -44,10 +44,10 @@ class PokemonListPage extends HookConsumerWidget {
     // We don't wait for the data provider if the hardware says we're offline.
     // -------------------------------------------------------------------------
     final connectivityState = ref.watch(connectivityProvider);
-    final isOffline = connectivityState.maybeWhen(
-      data: (results) => results.contains(ConnectivityResult.none),
-      orElse: () => false,
-    );
+    final isOffline = switch (connectivityState) {
+      AsyncData(:final value) => value.contains(ConnectivityResult.none),
+      _ => false,
+    };
 
     return Scaffold(
       backgroundColor: Colors.white,
