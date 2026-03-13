@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:pokedex_app/features/pokemon/presentation/providers/pokemon_providers.dart';
 import 'package:pokedex_app/features/pokemon/presentation/pages/pokemon_list/widgets/pokemon_bottom_nav.dart';
+import 'package:pokedex_app/features/pokemon/presentation/widgets/favorite_animation.dart';
 import 'widgets/detail_content.dart';
 
 /// Displays full details for a single Pokemon.
@@ -14,6 +16,7 @@ class PokemonDetailPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final detailAsync = ref.watch(pokemonDetailProvider(id: pokemonId));
+    final isFavorite = ref.watch(isPokemonFavoriteProvider(pokemonId));
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -26,16 +29,16 @@ class PokemonDetailPage extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: Icon(
-              ref.watch(isPokemonFavoriteProvider(pokemonId))
-                  ? Icons.favorite
-                  : Icons.favorite_border,
-              color: ref.watch(isPokemonFavoriteProvider(pokemonId))
-                  ? Colors.red
-                  : Colors.white,
-              size: 28,
+            icon: FavoriteAnimationOverlay(
+              isFavorite: isFavorite,
+              child: Icon(
+                isFavorite ? Icons.favorite : Icons.favorite_border,
+                color: isFavorite ? Colors.red : Colors.white,
+                size: 28,
+              ),
             ),
             onPressed: () {
+              HapticFeedback.lightImpact();
               final detail = detailAsync.value;
               if (detail == null) return;
               

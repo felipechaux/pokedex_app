@@ -41,7 +41,7 @@ final class PokemonFilterProvider
   }
 }
 
-String _$pokemonFilterHash() => r'e28704e5b8ca8f9b12e5c6617927c2537b8a5da9';
+String _$pokemonFilterHash() => r'841ef9b8bd9df735a0cd399440a2c229b9b16ae8';
 
 abstract class _$PokemonFilter extends $Notifier<PokemonFilterState> {
   PokemonFilterState build();

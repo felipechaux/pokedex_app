@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pokedex_app/l10n/app_localizations.dart';
 
 class FilterTypeList extends StatelessWidget {
@@ -61,7 +62,10 @@ class FilterTypeList extends StatelessWidget {
               ),
             ),
             value: isSelected,
-            onChanged: (_) => onToggle(type),
+            onChanged: (_) {
+              HapticFeedback.lightImpact();
+              onToggle(type);
+            },
             controlAffinity: ListTileControlAffinity.trailing,
             activeColor: const Color(0xFF1E88E5),
             contentPadding: const EdgeInsets.symmetric(horizontal: 12),

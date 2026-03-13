@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:pokedex_app/l10n/app_localizations.dart';
@@ -51,6 +52,7 @@ class SearchBarHeader extends HookConsumerWidget {
                             ? IconButton(
                                 icon: const Icon(Icons.clear, color: Colors.grey),
                                 onPressed: () {
+                                  HapticFeedback.lightImpact();
                                   searchController.clear();
                                   ref
                                       .read(pokemonFilterProvider.notifier)
@@ -86,6 +88,7 @@ class FilterButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () {
+        HapticFeedback.lightImpact();
         showModalBottomSheet<void>(
           context: context,
           isScrollControlled: true,

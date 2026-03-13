@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pokedex_app/l10n/app_localizations.dart';
 
 import 'package:pokedex_app/config/router/app_router.dart';
@@ -29,6 +30,7 @@ class PokemonBottomNav extends StatelessWidget {
           const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
       unselectedLabelStyle: const TextStyle(fontSize: 12),
       onTap: (index) {
+        HapticFeedback.lightImpact();
         if (index == currentIndex) return;
 
         switch (index) {

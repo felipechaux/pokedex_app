@@ -28,10 +28,13 @@ class DetailContent extends StatelessWidget {
             children: [
               ClipPath(
                 clipper: HeaderClipper(),
-                child: Container(
-                  height: 380,
-                  width: double.infinity,
-                  color: baseColor,
+                child: Hero(
+                  tag: 'background_${pokemon.id}',
+                  child: Container(
+                    height: 380,
+                    width: double.infinity,
+                    color: baseColor,
+                  ),
                 ),
               ),
               Positioned(

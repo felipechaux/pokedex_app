@@ -8,8 +8,11 @@ import 'package:pokedex_app/features/pokemon/data/repository/pokemon_repository_
 
 import 'package:pokedex_app/features/pokemon/data/models/pokemon_species_model.dart';
 
-class MockPokemonRemoteDataSource extends Mock implements PokemonRemoteDataSource {}
-class MockPokemonLocalDataSource extends Mock implements PokemonLocalDataSource {}
+class MockPokemonRemoteDataSource extends Mock
+    implements PokemonRemoteDataSource {}
+
+class MockPokemonLocalDataSource extends Mock
+    implements PokemonLocalDataSource {}
 
 void main() {
   late PokemonRepositoryImpl repository;
@@ -19,14 +22,20 @@ void main() {
   setUp(() {
     mockRemoteDataSource = MockPokemonRemoteDataSource();
     mockLocalDataSource = MockPokemonLocalDataSource();
-    repository = PokemonRepositoryImpl(mockRemoteDataSource, mockLocalDataSource);
+    repository = PokemonRepositoryImpl(
+      mockRemoteDataSource,
+      mockLocalDataSource,
+    );
   });
 
   group('getPokemonList', () {
     const tPokemonListResponse = PokemonListResponseModel(
       count: 1,
       results: [
-        PokemonResult(name: 'bulbasaur', url: 'https://pokeapi.co/api/v2/pokemon/1/'),
+        PokemonResult(
+          name: 'bulbasaur',
+          url: 'https://pokeapi.co/api/v2/pokemon/1/',
+        ),
       ],
     );
 
@@ -46,22 +55,25 @@ void main() {
       sprites: PokemonSprites(frontDefault: 'url'),
     );
 
-    test('should return list of pokemon entities when call is successful', () async {
-      // Arrange
-      when(() => mockRemoteDataSource.getPokemonList(
-            limit: any(named: 'limit'),
-            offset: any(named: 'offset'),
-          )).thenAnswer((_) async => tPokemonListResponse);
-      when(() => mockRemoteDataSource.getPokemonDetail(any()))
-          .thenAnswer((_) async => tPokemonModel);
+    test(
+      'should return list of pokemon entities when call is successful',
+      () async {
+        // Arrange
+        when(
+          () => mockRemoteDataSource.getPokemonList(),
+        ).thenAnswer((_) async => tPokemonListResponse);
+        when(
+          () => mockRemoteDataSource.getPokemonDetail(any()),
+        ).thenAnswer((_) async => tPokemonModel);
 
-      // Act
-      final result = await repository.getPokemonList(limit: 20, offset: 0);
+        // Act
+        final result = await repository.getPokemonList(limit: 20, offset: 0);
 
-      // Assert
-      expect(result, hasLength(1));
-      expect(result.first.name, 'bulbasaur');
-    });
+        // Assert
+        expect(result, hasLength(1));
+        expect(result.first.name, 'bulbasaur');
+      },
+    );
   });
 
   group('getPokemonDetail', () {
@@ -81,23 +93,25 @@ void main() {
       flavorTextEntries: [
         FlavorTextEntry(
           flavorText: 'flavor',
-          language: LanguageRef(name: 'es'),
+          language: LanguageRef(name: 'en'),
         ),
       ],
       genera: [
         GenusEntry(
           genus: 'category',
-          language: LanguageRef(name: 'es'),
+          language: LanguageRef(name: 'en'),
         ),
       ],
     );
 
     test('should return pokemon entity when call is successful', () async {
       // Arrange
-      when(() => mockRemoteDataSource.getPokemonDetail(any()))
-          .thenAnswer((_) async => tPokemonModel);
-      when(() => mockRemoteDataSource.getPokemonSpecies(any()))
-          .thenAnswer((_) async => tSpeciesModel);
+      when(
+        () => mockRemoteDataSource.getPokemonDetail(any()),
+      ).thenAnswer((_) async => tPokemonModel);
+      when(
+        () => mockRemoteDataSource.getPokemonSpecies(any()),
+      ).thenAnswer((_) async => tSpeciesModel);
 
       // Act
       final result = await repository.getPokemonDetail(id: 1);
