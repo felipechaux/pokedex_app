@@ -19,13 +19,13 @@ class _SplashPageState extends State<SplashPage> {
   Future<void> _navigateToNext() async {
     // Wait for animation to finish
     await Future<void>.delayed(const Duration(seconds: 3));
-    
+
     if (!mounted) return;
 
     final prefs = await SharedPreferences.getInstance();
-    
+
     if (!mounted) return;
-    
+
     final isFirstTime = prefs.getBool('isFirstTime') ?? true;
 
     if (isFirstTime) {

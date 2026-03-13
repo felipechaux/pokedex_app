@@ -3,6 +3,7 @@
 [![Flutter](https://img.shields.io/badge/Flutter-v3.29.0+-02569B?logo=flutter&logoColor=white)](https://flutter.dev)
 [![Clean Architecture](https://img.shields.io/badge/Architecture-Clean_Architecture-green)](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 [![State Management](https://img.shields.io/badge/State_Management-Riverpod-3d61ff)](https://riverpod.dev)
+[![Flutter CI](https://github.com/felipechaux/pokedex_app/actions/workflows/main.yml/badge.svg)](https://github.com/felipechaux/pokedex_app/actions/workflows/main.yml)
 
 Una aplicación de Pokédex moderna y profesional construida con **Flutter**, siguiendo los principios de **Clean Architecture** y patrones **SOLID**. Diseñada para ofrecer una experiencia de usuario fluida, con soporte multi-idioma, persistencia local y un sistema de temas dinámicos.
 
@@ -101,13 +102,24 @@ Se han implementado diversas capas para asegurar la estabilidad y protección de
 
 ---
 
+## ⚙️ Pipeline de Integración Continua (CI/CD)
+
+Para garantizar la calidad de un rol **Senior**, este proyecto incluye una pipeline automatizada mediante **GitHub Actions** que se ejecuta en cada `push` y `pull_request`:
+
+1.  **Análisis Dinámico & Linting**: Verificación automática de reglas de estilo y buenas prácticas mediante `flutter analyze`.
+2.  **Tests Automatizados**: Ejecución de la suite completa de pruebas unitarias y de repositorio.
+3.  **Check de Formato**: Asegura que el código siga el estándar oficial de Dart.
+4.  **Build Check**: Validación de que el proyecto compila correctamente para Android (APK) sin errores latentes.
+
+---
+
 ## 🔥 Características Principales
 
 1.  **Listado Infinito**: Carga paginada de Pokémon con skeleton loaders fluidos.
 2.  **Detalle Extendido**: Información completa incluyendo tipos, estadísticas base, habilidades y descripciones localizadas.
 3.  **Sistema de Favoritos**: Persistencia local con efectos visuales animados (pulsing hearts & sparkles).
 4.  **I18N (Multi-idioma)**: Soporte completo para **Inglés** y **Español**, incluyendo datos dinámicos desde la API.
-5.  **Temas Dinámicos**: Modo Claro y Modo Oscuro persistentes.
+5.  **Temas Dinámicos**: Soporte completo para **Modo Claro** y **Modo Oscuro** (Blue Dark) con persistencia automática.
 6.  **Offline Ready**: Notificación instantánea y estado de error personalizado (Magikarp state).
 7.  **UX Táctil**: Experiencia enriquecida con vibraciones sutiles (Haptics) y micro-animaciones premium.
 
