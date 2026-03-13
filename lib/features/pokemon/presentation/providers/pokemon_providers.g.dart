@@ -191,92 +191,6 @@ final class GetPokemonDetailProvider
 
 String _$getPokemonDetailHash() => r'0291d5b8d41c7f6e54ad00d1e327210e8727d4bb';
 
-/// Provides the paginated list of Pokemon.
-
-@ProviderFor(pokemonList)
-final pokemonListProvider = PokemonListFamily._();
-
-/// Provides the paginated list of Pokemon.
-
-final class PokemonListProvider
-    extends
-        $FunctionalProvider<
-          AsyncValue<List<PokemonListItemState>>,
-          List<PokemonListItemState>,
-          FutureOr<List<PokemonListItemState>>
-        >
-    with
-        $FutureModifier<List<PokemonListItemState>>,
-        $FutureProvider<List<PokemonListItemState>> {
-  /// Provides the paginated list of Pokemon.
-  PokemonListProvider._({
-    required PokemonListFamily super.from,
-    required int super.argument,
-  }) : super(
-         retry: null,
-         name: r'pokemonListProvider',
-         isAutoDispose: true,
-         dependencies: null,
-         $allTransitiveDependencies: null,
-       );
-
-  @override
-  String debugGetCreateSourceHash() => _$pokemonListHash();
-
-  @override
-  String toString() {
-    return r'pokemonListProvider'
-        ''
-        '($argument)';
-  }
-
-  @$internal
-  @override
-  $FutureProviderElement<List<PokemonListItemState>> $createElement(
-    $ProviderPointer pointer,
-  ) => $FutureProviderElement(pointer);
-
-  @override
-  FutureOr<List<PokemonListItemState>> create(Ref ref) {
-    final argument = this.argument as int;
-    return pokemonList(ref, offset: argument);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is PokemonListProvider && other.argument == argument;
-  }
-
-  @override
-  int get hashCode {
-    return argument.hashCode;
-  }
-}
-
-String _$pokemonListHash() => r'5a38dd02d7b17dad121a6554e9cb1815659df9a8';
-
-/// Provides the paginated list of Pokemon.
-
-final class PokemonListFamily extends $Family
-    with $FunctionalFamilyOverride<FutureOr<List<PokemonListItemState>>, int> {
-  PokemonListFamily._()
-    : super(
-        retry: null,
-        name: r'pokemonListProvider',
-        dependencies: null,
-        $allTransitiveDependencies: null,
-        isAutoDispose: true,
-      );
-
-  /// Provides the paginated list of Pokemon.
-
-  PokemonListProvider call({int offset = 0}) =>
-      PokemonListProvider._(argument: offset, from: this);
-
-  @override
-  String toString() => r'pokemonListProvider';
-}
-
 /// Provides detail for a single Pokemon.
 
 @ProviderFor(pokemonDetail)
@@ -361,4 +275,61 @@ final class PokemonDetailFamily extends $Family
 
   @override
   String toString() => r'pokemonDetailProvider';
+}
+
+/// A notifier that manages the paginated Pokemon list.
+
+@ProviderFor(PokemonListNotifier)
+final pokemonListProvider = PokemonListNotifierProvider._();
+
+/// A notifier that manages the paginated Pokemon list.
+final class PokemonListNotifierProvider
+    extends $AsyncNotifierProvider<PokemonListNotifier, PokemonListPageState> {
+  /// A notifier that manages the paginated Pokemon list.
+  PokemonListNotifierProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'pokemonListProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$pokemonListNotifierHash();
+
+  @$internal
+  @override
+  PokemonListNotifier create() => PokemonListNotifier();
+}
+
+String _$pokemonListNotifierHash() =>
+    r'53523dbe84e9fcb93ff837c4c73de8b44cb3be50';
+
+/// A notifier that manages the paginated Pokemon list.
+
+abstract class _$PokemonListNotifier
+    extends $AsyncNotifier<PokemonListPageState> {
+  FutureOr<PokemonListPageState> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref =
+        this.ref
+            as $Ref<AsyncValue<PokemonListPageState>, PokemonListPageState>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<
+                AsyncValue<PokemonListPageState>,
+                PokemonListPageState
+              >,
+              AsyncValue<PokemonListPageState>,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
 }

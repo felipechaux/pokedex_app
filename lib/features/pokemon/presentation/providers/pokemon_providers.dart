@@ -1,3 +1,4 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:pokedex_app/core/network/dio_provider.dart';
@@ -8,6 +9,7 @@ import 'package:pokedex_app/features/pokemon/domain/usecases/get_pokemon_detail.
 import 'package:pokedex_app/features/pokemon/domain/usecases/get_pokemon_list.dart';
 
 part 'pokemon_providers.g.dart';
+part 'pokemon_providers.freezed.dart';
 
 // ---------------------------------------------------------------------------
 // Infrastructure providers
@@ -37,28 +39,6 @@ GetPokemonDetail getPokemonDetail(Ref ref) =>
 // Data providers
 // ---------------------------------------------------------------------------
 
-/// Provides the paginated list of Pokemon.
-@riverpod
-Future<List<PokemonListItemState>> pokemonList(
-  Ref ref, {
-  int offset = 0,
-}) async {
-  final useCase = ref.watch(getPokemonListProvider);
-  final items = await useCase(
-    GetPokemonListParams(limit: 20, offset: offset),
-  );
-  return items
-      .map(
-        (e) => PokemonListItemState(
-          id: e.id,
-          name: e.name,
-          imageUrl: e.imageUrl,
-          types: e.types,
-        ),
-      )
-      .toList();
-}
-
 /// Provides detail for a single Pokemon.
 @riverpod
 Future<PokemonDetailState> pokemonDetail(
@@ -79,6 +59,69 @@ Future<PokemonDetailState> pokemonDetail(
         .toList(),
     abilities: pokemon.abilities,
   );
+}
+
+/// A notifier that manages the paginated Pokemon list.
+@riverpod
+class PokemonListNotifier extends _$PokemonListNotifier {
+  @override
+  FutureOr<PokemonListPageState> build() async {
+    final items = await _fetchPage(0);
+    return PokemonListPageState(items: items, offset: 0, isLoadingMore: false);
+  }
+
+  Future<void> fetchNextPage() async {
+    final currentState = state.value;
+    if (currentState == null || currentState.isLoadingMore) return;
+
+    state = AsyncData(currentState.copyWith(isLoadingMore: true));
+
+    try {
+      final nextOffset = currentState.offset + 20;
+      final newItems = await _fetchPage(nextOffset);
+
+      // Avoid duplicates
+      final currentIds = currentState.items.map((e) => e.id).toSet();
+      final filteredNewItems =
+          newItems.where((e) => !currentIds.contains(e.id)).toList();
+
+      state = AsyncData(
+        currentState.copyWith(
+          items: [...currentState.items, ...filteredNewItems],
+          offset: nextOffset,
+          isLoadingMore: false,
+        ),
+      );
+    } catch (e, st) {
+      state = AsyncError(e, st);
+    }
+  }
+
+  Future<List<PokemonListItemState>> _fetchPage(int offset) async {
+    final useCase = ref.read(getPokemonListProvider);
+    final items = await useCase(
+      GetPokemonListParams(limit: 20, offset: offset),
+    );
+    return items
+        .map(
+          (e) => PokemonListItemState(
+            id: e.id,
+            name: e.name,
+            imageUrl: e.imageUrl,
+            types: e.types,
+          ),
+        )
+        .toList();
+  }
+}
+
+@freezed
+abstract class PokemonListPageState with _$PokemonListPageState {
+  const factory PokemonListPageState({
+    required List<PokemonListItemState> items,
+    required int offset,
+    required bool isLoadingMore,
+  }) = _PokemonListPageState;
 }
 
 // ---------------------------------------------------------------------------
