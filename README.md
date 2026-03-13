@@ -14,6 +14,7 @@ Una aplicación de Pokédex moderna y profesional construida con **Flutter**, si
 
 https://github.com/user-attachments/assets/bdd4d578-15ae-4750-91c0-0aad533987bf
 
+### Offline Reconexion
 
 
 
