@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:pokedex_app/core/providers/locale_provider.dart';
 
+import 'package:pokedex_app/core/constants/constants.dart';
 import 'package:pokedex_app/core/errors/failures.dart';
 import 'package:pokedex_app/core/network/network_info.dart';
 import 'package:pokedex_app/core/providers/storage_providers.dart';
@@ -163,7 +164,7 @@ class PokemonListNotifier extends _$PokemonListNotifier {
     );
 
     if (isHardwareOffline) {
-      throw const Failure.network(message: 'No hay conexión a internet');
+      throw const Failure.network(message: kNoInternetSimpleError);
     }
 
     final hasInternet = await ref.read(networkInfoProvider).isConnected;
@@ -171,7 +172,7 @@ class PokemonListNotifier extends _$PokemonListNotifier {
     
     if (!hasInternet) {
       throw const Failure.network(
-        message: 'No hay acceso a internet. Verifica tu conexión.',
+        message: kNoInternetAccessError,
       );
     }
 

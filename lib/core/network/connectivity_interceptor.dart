@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:pokedex_app/core/constants/constants.dart';
 import 'package:pokedex_app/core/errors/failures.dart';
 import 'package:pokedex_app/core/network/network_info.dart';
 
@@ -19,7 +20,7 @@ class ConnectivityInterceptor extends Interceptor {
       return handler.reject(
         DioException(
           requestOptions: options,
-          error: const Failure.network(message: 'No hay conexión a internet'),
+          error: const Failure.network(message: kNoInternetSimpleError),
           type: DioExceptionType.connectionError,
         ),
       );
@@ -39,7 +40,7 @@ class ConnectivityInterceptor extends Interceptor {
         DioException(
           requestOptions: err.requestOptions,
           error: const Failure.network(
-            message: 'No hay conexión a internet. Verifica tu red.',
+            message: kNoInternetError,
           ),
           type: DioExceptionType.connectionError,
         ),

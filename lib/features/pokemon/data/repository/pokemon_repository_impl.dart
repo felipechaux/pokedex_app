@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:pokedex_app/core/errors/failures.dart';
 
+import 'package:pokedex_app/core/constants/constants.dart';
 import 'package:pokedex_app/features/pokemon/domain/entities/pokemon.dart';
 import 'package:pokedex_app/features/pokemon/domain/entities/pokemon_list_item.dart';
 import 'package:pokedex_app/features/pokemon/domain/repository/pokemon_repository.dart';
@@ -49,9 +50,9 @@ final class PokemonRepositoryImpl implements PokemonRepository {
       throw _handleDioError(e);
     } catch (e) {
       if (e.toString().contains('SocketException') || e.toString().contains('Failed host lookup')) {
-        throw const Failure.network(message: 'No hay conexión a internet. Verifica tu red.');
+        throw const Failure.network(message: kNoInternetError);
       }
-      throw Failure.unknown(message: 'Error inesperado: $e');
+      throw Failure.unknown(message: '$kUnexpectedError: $e');
     }
   }
 
@@ -88,9 +89,9 @@ final class PokemonRepositoryImpl implements PokemonRepository {
       throw _handleDioError(e);
     } catch (e) {
       if (e.toString().contains('SocketException') || e.toString().contains('Failed host lookup')) {
-        throw const Failure.network(message: 'No hay conexión a internet. Verifica tu red.');
+        throw const Failure.network(message: kNoInternetError);
       }
-      throw Failure.unknown(message: 'Error inesperado: $e');
+      throw Failure.unknown(message: '$kUnexpectedError: $e');
     }
   }
 
@@ -160,8 +161,8 @@ final class PokemonRepositoryImpl implements PokemonRepository {
             e.type == DioExceptionType.connectionTimeout ||
             e.message?.contains('SocketException') == true ||
             e.message?.contains('Failed host lookup') == true)
-        ? 'No hay conexión a internet. Verifica tu red.'
-        : 'Error de red: ${e.message}';
+        ? kNoInternetError
+        : '$kNetworkErrorPrefix: ${e.message}';
 
     return Failure.network(
       message: message,
