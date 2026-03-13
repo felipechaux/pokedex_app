@@ -3,6 +3,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:pokedex_app/features/pokemon/data/data_sources/remote/pokemon_remote_data_source.dart';
 import 'package:pokedex_app/features/pokemon/data/models/pokemon_list_response_model.dart';
 import 'package:pokedex_app/features/pokemon/data/models/pokemon_model.dart';
+import 'package:pokedex_app/core/errors/failures.dart';
 import 'package:pokedex_app/features/pokemon/data/repository/pokemon_repository_impl.dart';
 
 class MockPokemonRemoteDataSource extends Mock implements PokemonRemoteDataSource {}
@@ -60,7 +61,7 @@ void main() {
       verify(() => mockRemoteDataSource.getPokemonDetail(1)).called(1);
     });
 
-    test('should throw exception when the call to remote data source is unsuccessful', () async {
+    test('should throw Failure.unknown when the call to remote data source throws a generic Exception', () async {
       // Arrange
       when(() => mockRemoteDataSource.getPokemonList(
             limit: any(named: 'limit'),
@@ -71,7 +72,10 @@ void main() {
       final call = repository.getPokemonList;
 
       // Assert
-      expect(() => call(limit: 20, offset: 0), throwsException);
+      expect(
+        () => call(limit: 20, offset: 0),
+        throwsA(isA<Failure>()),
+      );
     });
   });
 

@@ -1,7 +1,10 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import 'package:pokedex_app/core/errors/failures.dart';
 import 'package:pokedex_app/core/network/dio_provider.dart';
+import 'package:pokedex_app/core/network/network_info.dart';
 import 'package:pokedex_app/features/pokemon/data/data_sources/remote/pokemon_remote_data_source.dart';
 import 'package:pokedex_app/features/pokemon/data/repository/pokemon_repository_impl.dart';
 import 'package:pokedex_app/features/pokemon/domain/repository/pokemon_repository.dart';
@@ -20,8 +23,9 @@ PokemonRemoteDataSource pokemonRemoteDataSource(Ref ref) =>
     PokemonRemoteDataSource(ref.watch(dioProvider));
 
 @riverpod
-PokemonRepository pokemonRepository(Ref ref) =>
-    PokemonRepositoryImpl(ref.watch(pokemonRemoteDataSourceProvider));
+PokemonRepository pokemonRepository(Ref ref) => PokemonRepositoryImpl(
+      ref.watch(pokemonRemoteDataSourceProvider),
+    );
 
 // ---------------------------------------------------------------------------
 // Use case providers
@@ -66,6 +70,29 @@ Future<PokemonDetailState> pokemonDetail(
 class PokemonListNotifier extends _$PokemonListNotifier {
   @override
   FutureOr<PokemonListPageState> build() async {
+    // 1. Instant hardware check (Reactive)
+    // Now optimized to yield current state immediately in the provider.
+    final connectivityState = ref.watch(connectivityProvider);
+    final isHardwareOffline = connectivityState.maybeWhen(
+      data: (results) => results.contains(ConnectivityResult.none),
+      orElse: () => false,
+    );
+
+    if (isHardwareOffline) {
+      throw const Failure.network(message: 'No hay conexión a internet');
+    }
+
+    // 2. Verified check (Zombies: Wi-Fi on but no internet)
+    // We do this to fail fast if we are in a Wi-Fi with no internet.
+    final hasInternet = await ref.read(networkInfoProvider).isConnected;
+    if (!ref.mounted) return const PokemonListPageState(items: [], offset: 0, isLoadingMore: false);
+    
+    if (!hasInternet) {
+      throw const Failure.network(
+        message: 'No hay acceso a internet. Verifica tu conexión.',
+      );
+    }
+
     final items = await _fetchPage(0);
     return PokemonListPageState(items: items, offset: 0, isLoadingMore: false);
   }
@@ -79,6 +106,7 @@ class PokemonListNotifier extends _$PokemonListNotifier {
     try {
       final nextOffset = currentState.offset + 20;
       final newItems = await _fetchPage(nextOffset);
+      if (!ref.mounted) return;
 
       // Avoid duplicates
       final currentIds = currentState.items.map((e) => e.id).toSet();
@@ -98,6 +126,7 @@ class PokemonListNotifier extends _$PokemonListNotifier {
   }
 
   Future<List<PokemonListItemState>> _fetchPage(int offset) async {
+    if (!ref.mounted) return [];
     final useCase = ref.read(getPokemonListProvider);
     final items = await useCase(
       GetPokemonListParams(limit: 20, offset: offset),

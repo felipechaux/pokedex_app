@@ -7,8 +7,12 @@ import 'package:pokedex_app/features/pokemon/domain/usecases/get_pokemon_detail.
 import 'package:pokedex_app/features/pokemon/domain/usecases/get_pokemon_list.dart';
 import 'package:pokedex_app/features/pokemon/presentation/providers/pokemon_providers.dart';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:pokedex_app/core/network/network_info.dart';
+
 class MockGetPokemonList extends Mock implements GetPokemonList {}
 class MockGetPokemonDetail extends Mock implements GetPokemonDetail {}
+class MockNetworkInfo extends Mock implements NetworkInfo {}
 
 class FakeGetPokemonDetailParams extends Fake implements GetPokemonDetailParams {}
 
@@ -16,6 +20,7 @@ void main() {
   late ProviderContainer container;
   late MockGetPokemonList mockGetPokemonList;
   late MockGetPokemonDetail mockGetPokemonDetail;
+  late MockNetworkInfo mockNetworkInfo;
 
   setUpAll(() {
     registerFallbackValue(const GetPokemonListParams());
@@ -25,10 +30,17 @@ void main() {
   setUp(() {
     mockGetPokemonList = MockGetPokemonList();
     mockGetPokemonDetail = MockGetPokemonDetail();
+    mockNetworkInfo = MockNetworkInfo();
+
+    // Default mock behavior
+    when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+
     container = ProviderContainer(
       overrides: [
         getPokemonListProvider.overrideWithValue(mockGetPokemonList),
         getPokemonDetailProvider.overrideWithValue(mockGetPokemonDetail),
+        networkInfoProvider.overrideWithValue(mockNetworkInfo),
+        connectivityProvider.overrideWith((ref) => Stream.value([ConnectivityResult.wifi])),
       ],
     );
   });

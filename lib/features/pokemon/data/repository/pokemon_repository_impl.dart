@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:pokedex_app/core/errors/failures.dart';
 
 import 'package:pokedex_app/features/pokemon/domain/entities/pokemon.dart';
 import 'package:pokedex_app/features/pokemon/domain/entities/pokemon_list_item.dart';
@@ -41,7 +42,12 @@ final class PokemonRepositoryImpl implements PokemonRepository {
 
       return results;
     } on DioException catch (e) {
-      throw Exception('Network error: ${e.message}');
+      throw _handleDioError(e);
+    } catch (e) {
+      if (e.toString().contains('SocketException') || e.toString().contains('Failed host lookup')) {
+        throw const Failure.network(message: 'No hay conexión a internet. Verifica tu red.');
+      }
+      throw Failure.unknown(message: 'Error inesperado: $e');
     }
   }
 
@@ -51,7 +57,12 @@ final class PokemonRepositoryImpl implements PokemonRepository {
       final model = await _remoteDataSource.getPokemonDetail(id);
       return _toDomainEntity(model);
     } on DioException catch (e) {
-      throw Exception('Network error: ${e.message}');
+      throw _handleDioError(e);
+    } catch (e) {
+      if (e.toString().contains('SocketException') || e.toString().contains('Failed host lookup')) {
+        throw const Failure.network(message: 'No hay conexión a internet. Verifica tu red.');
+      }
+      throw Failure.unknown(message: 'Error inesperado: $e');
     }
   }
 
@@ -81,6 +92,20 @@ final class PokemonRepositoryImpl implements PokemonRepository {
             .map((a) => a.ability.name)
             .toList(),
       );
+
+  Failure _handleDioError(DioException e) {
+    final message = (e.type == DioExceptionType.connectionError ||
+            e.type == DioExceptionType.connectionTimeout ||
+            e.message?.contains('SocketException') == true ||
+            e.message?.contains('Failed host lookup') == true)
+        ? 'No hay conexión a internet. Verifica tu red.'
+        : 'Error de red: ${e.message}';
+
+    return Failure.network(
+      message: message,
+      statusCode: e.response?.statusCode,
+    );
+  }
 
   // ---------------------------------------------------------------------------
   // Helpers

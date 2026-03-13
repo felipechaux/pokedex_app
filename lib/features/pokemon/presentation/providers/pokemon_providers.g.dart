@@ -306,7 +306,7 @@ final class PokemonListNotifierProvider
 }
 
 String _$pokemonListNotifierHash() =>
-    r'53523dbe84e9fcb93ff837c4c73de8b44cb3be50';
+    r'47123dbb7f462257e28b44b53a1697ea3505e740';
 
 /// A notifier that manages the paginated Pokemon list.
 
