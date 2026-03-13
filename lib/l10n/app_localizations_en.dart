@@ -119,4 +119,75 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get systemMode => 'System';
+
+  @override
+  String get filterTitle => 'Filter by your preferences';
+
+  @override
+  String get type => 'Type';
+
+  @override
+  String get apply => 'Apply';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get clearFilter => 'Clear filter';
+
+  @override
+  String resultsFound(int count) {
+    return '$count results found';
+  }
+
+  @override
+  String get typeWater => 'Water';
+
+  @override
+  String get typeFire => 'Fire';
+
+  @override
+  String get typeGrass => 'Grass';
+
+  @override
+  String get typeElectric => 'Electric';
+
+  @override
+  String get typeIce => 'Ice';
+
+  @override
+  String get typeFighting => 'Fighting';
+
+  @override
+  String get typePoison => 'Poison';
+
+  @override
+  String get typeGround => 'Ground';
+
+  @override
+  String get typeFlying => 'Flying';
+
+  @override
+  String get typePsychic => 'Psychic';
+
+  @override
+  String get typeBug => 'Bug';
+
+  @override
+  String get typeRock => 'Rock';
+
+  @override
+  String get typeGhost => 'Ghost';
+
+  @override
+  String get typeDragon => 'Dragon';
+
+  @override
+  String get typeSteel => 'Steel';
+
+  @override
+  String get typeFairy => 'Fairy';
+
+  @override
+  String get typeNormal => 'Normal';
 }

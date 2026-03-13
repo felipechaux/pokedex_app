@@ -35,7 +35,37 @@
   "regions": "Regions",
   "lightMode": "Light",
   "darkMode": "Dark",
-  "systemMode": "System"
+  "systemMode": "System",
+  "filterTitle": "Filter by your preferences",
+  "type": "Type",
+  "apply": "Apply",
+  "cancel": "Cancel",
+  "clearFilter": "Clear filter",
+  "resultsFound": "{count} results found",
+  "@resultsFound": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "typeWater": "Water",
+  "typeFire": "Fire",
+  "typeGrass": "Grass",
+  "typeElectric": "Electric",
+  "typeIce": "Ice",
+  "typeFighting": "Fighting",
+  "typePoison": "Poison",
+  "typeGround": "Ground",
+  "typeFlying": "Flying",
+  "typePsychic": "Psychic",
+  "typeBug": "Bug",
+  "typeRock": "Rock",
+  "typeGhost": "Ghost",
+  "typeDragon": "Dragon",
+  "typeSteel": "Steel",
+  "typeFairy": "Fairy",
+  "typeNormal": "Normal"
 }
 
 

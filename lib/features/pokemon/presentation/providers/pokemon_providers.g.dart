@@ -633,3 +633,52 @@ abstract class _$PokemonListNotifier
     element.handleCreate(ref, build);
   }
 }
+
+@ProviderFor(filteredPokemonList)
+final filteredPokemonListProvider = FilteredPokemonListProvider._();
+
+final class FilteredPokemonListProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<PokemonListItemState>>,
+          AsyncValue<List<PokemonListItemState>>,
+          AsyncValue<List<PokemonListItemState>>
+        >
+    with $Provider<AsyncValue<List<PokemonListItemState>>> {
+  FilteredPokemonListProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'filteredPokemonListProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$filteredPokemonListHash();
+
+  @$internal
+  @override
+  $ProviderElement<AsyncValue<List<PokemonListItemState>>> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  AsyncValue<List<PokemonListItemState>> create(Ref ref) {
+    return filteredPokemonList(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AsyncValue<List<PokemonListItemState>> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride:
+          $SyncValueProvider<AsyncValue<List<PokemonListItemState>>>(value),
+    );
+  }
+}
+
+String _$filteredPokemonListHash() =>
+    r'f5da946a40cf6f9039a57d86d0f75a32da6f2fdd';

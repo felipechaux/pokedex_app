@@ -35,7 +35,37 @@
   "regions": "Regiones",
   "lightMode": "Claro",
   "darkMode": "Oscuro",
-  "systemMode": "Sistema"
+  "systemMode": "Sistema",
+  "filterTitle": "Filtra por tus preferencias",
+  "type": "Tipo",
+  "apply": "Aplicar",
+  "cancel": "Cancelar",
+  "clearFilter": "Borrar filtro",
+  "resultsFound": "Se han encontrado {count} resultados",
+  "@resultsFound": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "typeWater": "Agua",
+  "typeFire": "Fuego",
+  "typeGrass": "Planta",
+  "typeElectric": "Eléctrico",
+  "typeIce": "Hielo",
+  "typeFighting": "Lucha",
+  "typePoison": "Veneno",
+  "typeGround": "Tierra",
+  "typeFlying": "Volador",
+  "typePsychic": "Psíquico",
+  "typeBug": "Bicho",
+  "typeRock": "Roca",
+  "typeGhost": "Fantasma",
+  "typeDragon": "Dragón",
+  "typeSteel": "Acero",
+  "typeFairy": "Hada",
+  "typeNormal": "Normal"
 }
 
 

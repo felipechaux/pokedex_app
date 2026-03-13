@@ -16,6 +16,7 @@ import 'package:pokedex_app/features/pokemon/domain/usecases/manage_favorites.da
 import 'package:pokedex_app/features/pokemon/domain/entities/pokemon_list_item.dart';
 
 import 'package:pokedex_app/core/network/dio_provider.dart';
+import 'pokemon_filter_provider.dart';
 
 part 'pokemon_providers.g.dart';
 part 'pokemon_providers.freezed.dart';
@@ -223,6 +224,23 @@ class PokemonListNotifier extends _$PokemonListNotifier {
         )
         .toList();
   }
+}
+
+@riverpod
+AsyncValue<List<PokemonListItemState>> filteredPokemonList(Ref ref) {
+  final listState = ref.watch(pokemonListProvider);
+  final filter = ref.watch(pokemonFilterProvider);
+
+  return listState.whenData((state) {
+    return state.items.where((pokemon) {
+      final matchesSearch =
+          pokemon.name.toLowerCase().contains(filter.searchQuery.toLowerCase());
+      final matchesType = filter.selectedTypes.isEmpty ||
+          pokemon.types.any(
+              (type) => filter.selectedTypes.contains(type.toLowerCase()));
+      return matchesSearch && matchesType;
+    }).toList();
+  });
 }
 
 @freezed

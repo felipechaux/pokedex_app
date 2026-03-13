@@ -12,6 +12,7 @@ import 'widgets/pokemon_sliver_list.dart';
 import 'widgets/pokemon_list_error.dart';
 import 'widgets/pokemon_list_skeleton.dart';
 import 'widgets/pokemon_bottom_nav.dart';
+import '../../providers/pokemon_filter_provider.dart';
 
 /// Displays a paginated grid of Pokemon.
 class PokemonListPage extends HookConsumerWidget {
@@ -21,6 +22,8 @@ class PokemonListPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
     final listState = ref.watch(pokemonListProvider);
+    final filteredItemsState = ref.watch(filteredPokemonListProvider);
+    final filter = ref.watch(pokemonFilterProvider);
     final scrollController = useScrollController();
 
     // Infinite scroll listener.
@@ -79,7 +82,36 @@ class PokemonListPage extends HookConsumerWidget {
                   controller: scrollController,
                   slivers: [
                     const SearchBarHeader(),
-                    PokemonSliverList(items: state.items),
+                    if (filter.isActive)
+                      SliverPadding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        sliver: SliverToBoxAdapter(
+                          child: Row(
+                            children: [
+                              Text(
+                                l10n.resultsFound(filteredItemsState.value?.length ?? 0),
+                                style: const TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              const Spacer(),
+                              TextButton(
+                                onPressed: () => ref.read(pokemonFilterProvider.notifier).clearFilters(),
+                                child: Text(
+                                  l10n.clearFilter,
+                                  style: const TextStyle(
+                                    color: Colors.blue,
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    PokemonSliverList(items: filteredItemsState.value ?? []),
                     if (state.isLoadingMore)
                       const SliverToBoxAdapter(
                         child: Padding(

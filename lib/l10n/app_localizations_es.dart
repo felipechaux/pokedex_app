@@ -119,4 +119,75 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get systemMode => 'Sistema';
+
+  @override
+  String get filterTitle => 'Filtra por tus preferencias';
+
+  @override
+  String get type => 'Tipo';
+
+  @override
+  String get apply => 'Aplicar';
+
+  @override
+  String get cancel => 'Cancelar';
+
+  @override
+  String get clearFilter => 'Borrar filtro';
+
+  @override
+  String resultsFound(int count) {
+    return 'Se han encontrado $count resultados';
+  }
+
+  @override
+  String get typeWater => 'Agua';
+
+  @override
+  String get typeFire => 'Fuego';
+
+  @override
+  String get typeGrass => 'Planta';
+
+  @override
+  String get typeElectric => 'Eléctrico';
+
+  @override
+  String get typeIce => 'Hielo';
+
+  @override
+  String get typeFighting => 'Lucha';
+
+  @override
+  String get typePoison => 'Veneno';
+
+  @override
+  String get typeGround => 'Tierra';
+
+  @override
+  String get typeFlying => 'Volador';
+
+  @override
+  String get typePsychic => 'Psíquico';
+
+  @override
+  String get typeBug => 'Bicho';
+
+  @override
+  String get typeRock => 'Roca';
+
+  @override
+  String get typeGhost => 'Fantasma';
+
+  @override
+  String get typeDragon => 'Dragón';
+
+  @override
+  String get typeSteel => 'Acero';
+
+  @override
+  String get typeFairy => 'Hada';
+
+  @override
+  String get typeNormal => 'Normal';
 }
