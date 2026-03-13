@@ -16,6 +16,8 @@ https://github.com/user-attachments/assets/bdd4d578-15ae-4750-91c0-0aad533987bf
 
 ### Offline Reconexion
 
+https://github.com/user-attachments/assets/6cc2c62a-d67c-4284-bafa-4dd8335510d1
+
 
 
 
