@@ -32,8 +32,13 @@
   "errorMessage": "We couldn't load the information at this time. Please check your connection or try again later.",
   "noFavoritesMessage": "You haven't marked any Pokémon as a favorite",
   "noFavoritesInstruction": "Click the heart icon on your favorite Pokémon and they will appear here.",
-  "regions": "Regions"
+  "regions": "Regions",
+  "lightMode": "Light",
+  "darkMode": "Dark",
+  "systemMode": "System"
 }
+
+
 
 
 

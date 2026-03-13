@@ -32,8 +32,13 @@
   "errorMessage": "No pudimos cargar la información en este momento. Verifica tu conexión o intenta nuevamente más tarde.",
   "noFavoritesMessage": "No has marcado ningún Pokémon como favorito",
   "noFavoritesInstruction": "Haz clic en el ícono de corazón de tus Pokémon favoritos y aparecerán aquí.",
-  "regions": "Regiones"
+  "regions": "Regiones",
+  "lightMode": "Claro",
+  "darkMode": "Oscuro",
+  "systemMode": "Sistema"
 }
+
+
 
 
 

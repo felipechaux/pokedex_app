@@ -7,6 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pokedex_app/l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:pokedex_app/core/providers/locale_provider.dart';
+import 'package:pokedex_app/core/providers/theme_provider.dart';
 
 import 'dart:io';
 import 'package:flutter/foundation.dart';
@@ -75,16 +76,22 @@ class PokedexApp extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final locale = ref.watch(localeStateProvider);
+    final themeMode = ref.watch(themeStateProvider);
 
     useEffect(() {
-      Future.microtask(() => ref.read(localeStateProvider.notifier).init());
+      Future.microtask(() {
+        ref.read(localeStateProvider.notifier).init();
+        ref.read(themeStateProvider.notifier).init();
+      });
       return null;
     }, []);
 
     return MaterialApp(
       onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.darkTheme,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: themeMode,
       onGenerateRoute: generateRoute,
       initialRoute: AppRoutes.splash,
       locale: locale,

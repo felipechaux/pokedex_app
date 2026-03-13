@@ -17,7 +17,9 @@ class ProfileSectionHeader extends StatelessWidget {
         style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).brightness == Brightness.dark
+              ? const Color(0xFF72C2FF) // Light blue for dark mode
+              : const Color(0xFF1B85E7), // Brand blue for light mode
         ),
       ),
     );

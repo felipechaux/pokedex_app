@@ -15,11 +15,15 @@ class PokemonBottomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return BottomNavigationBar(
       currentIndex: currentIndex,
       type: BottomNavigationBarType.fixed,
-      selectedItemColor: const Color(0xFF1B85E7),
-      unselectedItemColor: Colors.grey,
+      backgroundColor: theme.scaffoldBackgroundColor,
+      selectedItemColor: theme.colorScheme.primary,
+      unselectedItemColor: isDark ? Colors.grey : const Color(0xFF2E3133),
       showUnselectedLabels: true,
       selectedLabelStyle:
           const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),

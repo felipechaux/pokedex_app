@@ -18,13 +18,18 @@ class ProfileSettingTile extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.grey.withValues(alpha: 0.1)),
       ),
       child: Row(
         children: [
-          Icon(icon, color: Colors.blueGrey),
+          Icon(
+            icon,
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.blue.shade200
+                : Colors.blueGrey,
+          ),
           const SizedBox(width: 16),
           Expanded(
             child: Text(

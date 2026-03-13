@@ -553,7 +553,7 @@ final class PokemonDetailProvider
   }
 }
 
-String _$pokemonDetailHash() => r'e25a4f1aebdb46f49b69ebb68bfc953ba3969188';
+String _$pokemonDetailHash() => r'4c2ebc628b1886b5083defeac6e58614cda50a60';
 
 /// Provides detail for a single Pokemon.
 
@@ -606,7 +606,7 @@ final class PokemonListNotifierProvider
 }
 
 String _$pokemonListNotifierHash() =>
-    r'0a1405559cc6e47f609203d870ab94eed78e21de';
+    r'1dadc136eba82edc6899fc07889acef053f6b627';
 
 /// A notifier that manages the paginated Pokemon list.
 

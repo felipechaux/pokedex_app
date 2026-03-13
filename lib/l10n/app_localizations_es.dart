@@ -110,4 +110,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get regions => 'Regiones';
+
+  @override
+  String get lightMode => 'Claro';
+
+  @override
+  String get darkMode => 'Oscuro';
+
+  @override
+  String get systemMode => 'Sistema';
 }
