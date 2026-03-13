@@ -10,11 +10,12 @@ Una aplicación de Pokédex moderna y profesional construida con **Flutter**, si
 
 ## 📱 Vista Previa (Prototype Showcase)
 
-> [!TIP]
-> **¿Cómo añadir tu video aquí?** Graba un clip de 15s de la app, abre este `README.md` en el editor de GitHub y simplemente **arrastra y suelta el archivo de video** debajo de esta línea. GitHub lo procesará y mostrará automáticamente.
 
-<!-- REEMPLAZAR ESTA LÍNEA CON TU VIDEO ARRASTRADO -->
-![Video Prototype Placeholder](https://via.placeholder.com/800x450.png?text=Arrastra+aquí+tu+Video+de+Demostración)
+https://github.com/user-attachments/assets/bdd4d578-15ae-4750-91c0-0aad533987bf
+
+
+
+
 
 ---
 
